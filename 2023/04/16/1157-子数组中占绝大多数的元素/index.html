@@ -20,7 +20,7 @@
 <meta property="og:description" content="1 题目描述设计一个数据结构，有效地找到给定子数组的 多数元素 。 子数组的 多数元素 是在子数组中出现 threshold 次数或次数以上的元素。 实现 MajorityChecker 类: MajorityChecker(int[] arr) 会用给定的数组 arr 对 MajorityChecker 初始化。int query(int left, int right, int thresho">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-16T09:13:47.000Z">
-<meta property="article:modified_time" content="2023-04-16T09:38:46.296Z">
+<meta property="article:modified_time" content="2023-04-16T09:50:53.930Z">
 <meta property="article:author" content="Pluto">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="随机化">
@@ -118,7 +118,7 @@
 <li>题目本质是求区间[left, right]之间的众数</li>
 <li>众数出现次数&gt;=区间长度，所以如果随机抽样该区间内的数，每次抽中众数的概率&gt;= 1/2</li>
 <li>假设随机抽取30次，则一次都没抽中众数的概率&lt;= (1/2)^k</li>
-<li>如果进行p次查询，每次查询相互独立，每次抽取k次则这p次查询结果都正确的概率为$$ (1 - (1/2)^k)^p $$，当p = 10^4， k = 30时计算该表达式的结果近似为99.99%</li>
+<li>如果进行p次查询，每次查询相互独立，每次抽取k次则这p次查询结果都正确的概率为$$(1 - (\frac{1}{2})^k)^p.$$，当p = 10^4， k = 30时计算该表达式的结果近似为99.99%</li>
 <li>故认为该随机抽样得到区间[left, right]的正确性可以保证</li>
 </ul>
 </li>
@@ -240,7 +240,7 @@ class MajorityChecker:
         self.seg_query(idx * 2 + 2, mid + 1, r, ql, qr, ans)
 </code></pre>
 <h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
-<p>想象力比知识更为重要。 ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
+<p>想象力比知识更为重要。<br>        ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
 </blockquote>
 
       
