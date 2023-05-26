@@ -5,23 +5,28 @@
   
 
   
-  <title>归档: 2022 | 研の随笔</title>
+  <title>1091-二进制矩阵中的最短路径 | 研の随笔</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   <meta name="keywords" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女" />
   
-  <meta name="description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
-<meta property="og:type" content="website">
-<meta property="og:title" content="研の随笔">
-<meta property="og:url" content="http://example.com/archives/2022/index.html">
+  <meta name="description" content="1 题目描述给你一个 n x n 的二进制矩阵 grid 中，返回矩阵中最短 畅通路径 的长度。如果不存在这样的路径，返回 -1 。 二进制矩阵中的 畅通路径 是一条从 左上角 单元格（即，(0, 0)）到 右下角 单元格（即，(n - 1, n - 1)）的路径，该路径同时满足下述要求： 路径途经的所有单元格都的值都是 0 。路径中所有相邻的单元格应当在 8 个方向之一 上连通（即，相邻两单元之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1091-二进制矩阵中的最短路径">
+<meta property="og:url" content="http://example.com/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/index.html">
 <meta property="og:site_name" content="研の随笔">
-<meta property="og:description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
+<meta property="og:description" content="1 题目描述给你一个 n x n 的二进制矩阵 grid 中，返回矩阵中最短 畅通路径 的长度。如果不存在这样的路径，返回 -1 。 二进制矩阵中的 畅通路径 是一条从 左上角 单元格（即，(0, 0)）到 右下角 单元格（即，(n - 1, n - 1)）的路径，该路径同时满足下述要求： 路径途经的所有单元格都的值都是 0 。路径中所有相邻的单元格应当在 8 个方向之一 上连通（即，相邻两单元之">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/18/example1_1.png">
+<meta property="article:published_time" content="2023-05-26T07:34:34.000Z">
+<meta property="article:modified_time" content="2023-05-26T07:52:25.447Z">
 <meta property="article:author" content="Pluto">
-<meta property="article:tag" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="BFS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/02/18/example1_1.png">
   
     <link rel="alternate" href="/atom.xml" title="研の随笔" type="application/atom+xml">
   
@@ -72,70 +77,138 @@
   </div>
 </header>
       <div id="middlecontent" title class="global-width sidebar-right">
-        <section id="main">
+        <section id="main"><article id="post-1091-二进制矩阵中的最短路径" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="global-container archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/14/Sakura/">Sakura</a>
+    <h1 class="article-title" itemprop="name">
+      1091-二进制矩阵中的最短路径
     </h1>
   
-      
-    </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2022/11/14/Sakura/" class="article-date">
-  <time datetime="2022-11-14T08:42:19.000Z" itemprop="datePublished">2022-11-14</time>
-</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
 
-    </div>
-  </div>
-</article>
+    </header>
   
+  <div class="article-meta">
+    <a href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" class="article-date">
+  <time datetime="2023-05-26T07:34:34.000Z" itemprop="datePublished">2023-05-26</time>
+</a>
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+
+  </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/18/hello-world/">Hello World</a>
-    </h1>
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
   
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
       
-    </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2022/10/18/hello-world/" class="article-date">
-  <time datetime="2022-10-18T06:52:30.674Z" itemprop="datePublished">2022-10-18</time>
-</a>
-      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个 n x n 的二进制矩阵 grid 中，返回矩阵中最短 畅通路径 的长度。如果不存在这样的路径，返回 -1 。</p>
+<p>二进制矩阵中的 畅通路径 是一条从 左上角 单元格（即，(0, 0)）到 右下角 单元格（即，(n - 1, n - 1)）的路径，该路径同时满足下述要求：</p>
+<p>路径途经的所有单元格都的值都是 0 。<br>路径中所有相邻的单元格应当在 8 个方向之一 上连通（即，相邻两单元之间彼此不同且共享一条边或者一个角）。<br>畅通路径的长度 是该路径途经的单元格总数。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode.com/uploads/2021/02/18/example1_1.png" alt="矩阵示例"></p>
+<pre><code class="diff">输入：grid = [[0,1],[1,0]]
+输出：2
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-path-in-binary-matrix">力扣（LeetCode）1091.二进制矩阵中的最短路径</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>经典BFS<ul>
+<li>首先判断出发点是否为0，不是则不存在路径返回-1</li>
+<li>然后用队列进行BFS遍历所有节点，同时初始化一个二维数组dist记录各个节点的最短路径，初始化为无穷大，dist[0][0] = 1</li>
+<li>接着以队列是否为空为条件遍历节点，每次弹出一个节点，判断周围节点下标是否符合条件，以及节点值是否为0，并用当前节点值是否等于前一个节点 + 1 来确定是否被访问过</li>
+<li>遍历时当队列出栈的节点为右下角节点时，返回dist[n - 1][n - 1]即可，否则继续遍历并更新节点路径值，同时将下一个满足路径的节点入队列</li>
+<li>循环结束则返回 - 1</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(n ^ 2)</li>
+<li>最多将n X n大小的矩阵元素都访问一遍</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(n ^ 2)</li>
+<li>需要一个n X n的数组记录每个节点的最短路径值</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// BFS
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -&gt; int:
+        if grid[0][0] == 1:
+            return -1
+        n = len(grid)
+        dist = [[inf] * n for _ in range(n)]
+        dist[0][0] = 1
+        queue = deque([(0, 0)])
+        while queue:
+            x, y = queue.popleft()
+            if x == y == n - 1:
+                return dist[x][y]
+            for i in range(-1, 2):
+                for j in range(-1, 2):
+                    if x + i &lt; 0 or x + i &gt;= n or y + j &lt; 0 or y + j &gt;= n:
+                        continue
+                    if grid[x + i][y + j] == 1 or dist[x + i][y + j] &lt;= dist[x][y] + 1:
+                        continue
+                    dist[x + i][y + j] =  dist[x][y] + 1
+                    queue.append((x + i, y + j))
+        return -1
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   There are only two kinds of force: the sword and thought. From the long terms, the sword is always defeated by thinking men. (世上只有两种力量：利剑和思想。从长而论，利剑总是败在思想手下。)<br>        ——拿破仑（1769.8.15——1821.5.5）</p>
+</blockquote>
+
       
     </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2023/05/15/Djangon-Vue-Admin%E5%BC%80%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Djangon-Vue-Admin开发</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
 </article>
-  
-  
-    </div></section>
-  
-
-
 </section>
         <aside id="sidebar">
   

@@ -74,6 +74,144 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-1024-不邻接植花" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/15/1024-%E4%B8%8D%E9%82%BB%E6%8E%A5%E6%A4%8D%E8%8A%B1/">1024.不邻接植花</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/04/15/1024-%E4%B8%8D%E9%82%BB%E6%8E%A5%E6%A4%8D%E8%8A%B1/" class="article-date">
+  <time datetime="2023-04-15T08:44:18.000Z" itemprop="datePublished">2023-04-15</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>有 n 个花园，按从 1 到 n 标记。另有数组 paths ，其中 paths[i] = [xi, yi] 描述了花园 xi 到花园 yi 的双向路径。在每个花园中，你打算种下四种花之一。</p>
+<p>另外，所有花园 最多 有 3 条路径可以进入或离开.</p>
+<p>你需要为每个花园选择一种花，使得通过路径相连的任何两个花园中的花的种类互不相同。</p>
+<p>以数组形式返回 任一 可行的方案作为答案 answer，其中 answer[i] 为在第 (i+1) 个花园中种植的花的种类。花的种类用  1、2、3、4 表示。保证存在答案。</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flower-planting-with-no-adjacent">力扣（LeetCode）1024.不邻接植花</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>标记+遍历<ul>
+<li>先将所有花园的植花颜色设置为0， 然后使用list或defaultdict对花园连接情况进行记录</li>
+<li>遍历花园连接表，根据当前连接花园着色情况确定当前花园的颜色</li>
+<li>如果使用defaultdict存储花园连接则需要判断是否有孤立花园（没有与任何花园连接），有则将颜色0改为1即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h2><pre><code class="python">// 个人解法，使用defaultdict存储
+class Solution:
+    def gardenNoAdj(self, n: int, paths: List[List[int]]) -&gt; List[int]:
+        flow_colors = [0] * n
+        gardens = defaultdict(list)
+
+        for i, j in paths:
+            gardens[i].append(j)
+            gardens[j].append(i)
+        for g, l in gardens.items():
+            colors = [False] * 5
+            for i in l:
+                colors[flow_colors[i - 1] - 1] = True
+            for i, flag in enumerate(colors):
+                if not flag:
+                    flow_colors[g - 1] = i + 1
+                    break
+        for garden, color in enumerate(flow_colors):
+            if color == 0:
+                flow_colors[garden] = 1
+        return flow_colors  
+</code></pre>
+<hr>
+<pre><code class="python">// 官方解法，使用二维list存储
+class Solution:
+    def gardenNoAdj(self, n: int, paths: List[List[int]]) -&gt; List[int]:
+        adj = [[] for i in range(n)]
+        for path in paths:
+            adj[path[0] - 1].append(path[1] - 1)
+            adj[path[1] - 1].append(path[0] - 1)
+        ans = [0] * n
+        for i in range(n):
+            colored = [False] * 5
+            for vertex in adj[i]:
+                colored[ans[vertex]] = True
+            for j in range(1, 5):
+                if not colored[j]:
+                    ans[i] = j
+                    break
+        return ans 
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>幸福来自于有目标的生活，而不是来自他人或物质。<br>        ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-Sakura" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/14/Sakura/">Sakura</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2022/11/14/Sakura/" class="article-date">
+  <time datetime="2022-11-14T08:42:19.000Z" itemprop="datePublished">2022-11-14</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>使用微信公众号编辑器有一个十分头疼的问题：粘贴出来的代码，格式错乱，空间小还带行号，而且特别丑。Markdown.com.cn编辑器能够解决这个问题。<br>​<br>Markdown是一种轻量级的「标记语言」。<a target="_blank" rel="noopener" href="https://markdown.com.cn/editor/">markdown教程</a><br>​<br>请阅读下方文本熟悉工具使用方法，本文可直接拷贝到微信中预览。<br>​</p>
+<h2 id="1-Markdown-com-cn-简介"><a href="#1-Markdown-com-cn-简介" class="headerlink" title="1 Markdown.com.cn 简介"></a>1 Markdown.com.cn 简介</h2><p>​</p>
+<ul>
+<li>支持自定义样式的 Markdown 编辑器</li>
+<li>支持微信公众号、知乎和稀土掘金</li>
+<li>点击右上方对应图标，一键复制到各平台<br>​<h2 id="2-Markdown语法教程"><a href="#2-Markdown语法教程" class="headerlink" title="2 Markdown语法教程"></a>2 Markdown语法教程</h2>​<h3 id="2-1-标题"><a href="#2-1-标题" class="headerlink" title="2.1 标题"></a>2.1 标题</h3>​<br>不同数量的<code>#</code>可以完成不同的标题，如下：<br>​<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1>​<h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2>​<h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3>​<h3 id="2-2-字体"><a href="#2-2-字体" class="headerlink" title="2.2 字体"></a>2.2 字体</h3>​<br>粗体、斜体、粗体和斜体，删除线，需要在文字前后加不同的标记符号。如下：</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-hello-world" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -181,7 +319,7 @@
   <div class="widget-box">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
     </div>
   </div>
 
@@ -191,7 +329,7 @@
   <div class="widget-box">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
+      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
     </div>
   </div>
 
@@ -212,6 +350,14 @@
       <ul>
         
           <li>
+            <a href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">1091-二进制矩阵中的最短路径</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/15/Djangon-Vue-Admin%E5%BC%80%E5%8F%91/">Djangon-Vue-Admin开发</a>
+          </li>
+        
+          <li>
             <a href="/2023/05/14/1054-%E8%B7%9D%E7%A6%BB%E7%9B%B8%E7%AD%89%E7%9A%84%E6%9D%A1%E5%BD%A2%E7%A0%81/">1054-距离相等的条形码</a>
           </li>
         
@@ -221,14 +367,6 @@
         
           <li>
             <a href="/2023/04/24/1105-%E5%A1%AB%E5%85%85%E4%B9%A6%E6%9E%B6/">1105-填充书架</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/22/1027-%E6%9C%80%E9%95%BF%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97/">1027-最长等差数列</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/19/1043-%E5%88%86%E9%9A%94%E6%95%B0%E7%BB%84%E4%BB%A5%E5%BE%97%E5%88%B0%E6%9C%80%E5%A4%A7%E5%92%8C/">1043-分隔数组以得到最大和</a>
           </li>
         
       </ul>
