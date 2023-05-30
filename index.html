@@ -74,6 +74,101 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-1110-删点成林" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/">1110-删点成林</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/" class="article-date">
+  <time datetime="2023-05-30T06:32:25.000Z" itemprop="datePublished">2023-05-30</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给出二叉树的根节点 root，树上每个节点都有一个不同的值。</p>
+<p>如果节点值在 to_delete 中出现，我们就把该节点从树上删去，最后得到一个森林（一些不相交的树构成的集合）。</p>
+<p>返回森林中的每棵树。你可以按任意顺序组织答案。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/07/05/screen-shot-2019-07-01-at-53836-pm.png" alt="二叉树示例"></p>
+<pre><code class="diff">输入：root = [1,2,3,4,5,6,7], to_delete = [3,5]
+输出：[[1,2,null,4],[6],[7]]
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-nodes-and-return-forest">力扣（LeetCode）1110.删点成林</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>DFS<ul>
+<li>首先判断节点值是否在删除列表中，如果在则左右子树节点成为潜在根节点，不在则继续向下搜索</li>
+<li>然后对左右子树的潜在根节点进行判断，如果父节点被删除并且该节点值不在删除列表中，则将该节点变为头节点加入结果列表中</li>
+<li>最后返回结果列表即可，注意判断父与子节点值是否删除后的返回结果</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(n)</li>
+<li>最多访问n个节点</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(n)</li>
+<li>树共有n个节点</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DFS
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -&gt; List[TreeNode]:
+        to_delete_set = set(to_delete)
+        roots = []
+        self.dfs(root, True, to_delete_set, roots)
+        return roots
+
+    def dfs(self, node: Optional[TreeNode], is_root: bool, to_delete_set: set[int], roots: List[TreeNode]) -&gt; Optional[TreeNode]:
+        if not node:
+            return None
+        delete = node.val in to_delete_set
+        node.left = self.dfs(node.left, delete, to_delete_set, roots)
+        node.right = self.dfs(node.right, delete, to_delete_set, roots)
+        if delete:
+            return None
+        else:
+            if is_root:
+                roots.append(node)
+            return node
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “I have noticed that even people who claim everything is predetermined and that we can do nothing to change it, look before they cross the road.”(我注意到，即使那些声称一切都已注定、人力无法改变天意的人在过马路的时候还是会左看右看。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-1091-二进制矩阵中的最短路径" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -824,177 +919,6 @@ class Solution:
 </article>
 
   
-    <article id="post-1157-子数组中占绝大多数的元素" class="article global-container article-type-post" itemscope itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/16/1157-%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AD%E5%8D%A0%E7%BB%9D%E5%A4%A7%E5%A4%9A%E6%95%B0%E7%9A%84%E5%85%83%E7%B4%A0/">1157-子数组中占绝大多数的元素</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2023/04/16/1157-%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AD%E5%8D%A0%E7%BB%9D%E5%A4%A7%E5%A4%9A%E6%95%B0%E7%9A%84%E5%85%83%E7%B4%A0/" class="article-date">
-  <time datetime="2023-04-16T09:13:47.000Z" itemprop="datePublished">2023-04-16</time>
-</a>
-    
-    
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>设计一个数据结构，有效地找到给定子数组的 多数元素 。</p>
-<p>子数组的 多数元素 是在子数组中出现 threshold 次数或次数以上的元素。</p>
-<p>实现 MajorityChecker 类:</p>
-<p>MajorityChecker(int[] arr) 会用给定的数组 arr 对 MajorityChecker 初始化。<br>int query(int left, int right, int threshold) 返回子数组中的元素  arr[left…right] 至少出现 threshold 次数，如果不存在这样的元素则返回 -1。</p>
-<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/online-majority-element-in-subarray">力扣（LeetCode）1157.子数组中占绝大多数的元素</a><br><a id="jump_8"></a></p>
-<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
-<li>随机化<ul>
-<li>题目本质是求区间[left, right]之间的众数</li>
-<li>众数出现次数&gt;=区间长度，所以如果随机抽样该区间内的数，每次抽中众数的概率&gt;= 1/2</li>
-<li>假设随机抽取30次，则一次都没抽中众数的概率&lt;= (1/2)^k</li>
-<li>如果进行p次查询，每次查询相互独立，每次抽取k次则这p次查询结果都正确的概率为$$(1 - (\frac{1}{2})^k)^p.$$，当p = 10^4， k = 30时计算该表达式的结果近似为99.99%</li>
-<li>故认为该随机抽样得到区间[left, right]的正确性可以保证</li>
-</ul>
-</li>
-<li>二分查找<ul>
-<li>根据随机化原理得到区间的众数值x后，需要统计其出现的具体次数</li>
-<li>考虑使用哈希字典存储arr，统计每个元素出现的位置序列list</li>
-<li>在list中使用二分查找边界right和left出现的下标，相减后得到其出现次数cnt</li>
-<li>当cnt &gt;= threshold时满足条件，如果cnt &gt;= 区间长度的一半但却小于threshold则返回-1</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
-<li>时间复杂度<ul>
-<li>O(n + kqlog n）</li>
-<li>哈希表处理时间复杂度O(n),共进行q轮查询，每轮k次，每次二分的时间复杂度为O(log n)</li>
-</ul>
-</li>
-<li>空间复杂度<ul>
-<li>哈希存储空间复杂度O(n)</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// 随机化 + 二分查找
-class MajorityChecker:
-    k = 30
-
-    def __init__(self, arr: List[int]):
-        self.arr = arr
-        self.cnt = defaultdict(list)
-        for i, a in enumerate(arr):
-            self.cnt[a].append(i)
-            
-
-    def query(self, left: int, right: int, threshold: int) -&gt; int:
-        arr_ = self.arr
-        cnt_ = self.cnt
-
-        length = right - left + 1
-        for i in range(MajorityChecker.k):
-            x = arr_[randint(left, right)]
-            pos = cnt_[x]
-            occ = bisect_right(pos, right) - bisect_left(pos, left)
-            if occ &gt;= threshold:
-                return x
-            elif occ * 2 &gt;= length:
-                return -1
-        return -1
-
-
-        
-# Your MajorityChecker object will be instantiated and called as such:
-# obj = MajorityChecker(arr)
-# param_1 = obj.query(left,right,threshold)
-</code></pre>
-<hr>
-<pre><code class="python">// 官方解法2：摩尔投票 + 线段树
-class Node:
-    def __init__(self, x: int = 0, cnt: int = 0):
-        self.x = x
-        self.cnt = cnt
-    
-    def __iadd__(self, that: &quot;Node&quot;) -&gt; &quot;Node&quot;:
-        if self.x == that.x:
-            self.cnt += that.cnt
-        elif self.cnt &gt;= that.cnt:
-            self.cnt -= that.cnt
-        else:
-            self.x = that.x
-            self.cnt = that.cnt - self.cnt
-        return self
-
-class MajorityChecker:
-    def __init__(self, arr: List[int]):
-        self.n = len(arr)
-        self.arr = arr
-        self.loc = defaultdict(list)
-
-        for i, val in enumerate(arr):
-            self.loc[val].append(i)
-        
-        self.tree = [Node() for _ in range(self.n * 4)]
-        self.seg_build(0, 0, self.n - 1)
-
-    def query(self, left: int, right: int, threshold: int) -&gt; int:
-        loc_ = self.loc
-
-        ans = Node()
-        self.seg_query(0, 0, self.n - 1, left, right, ans)
-        pos = loc_[ans.x]
-        occ = bisect_right(pos, right) - bisect_left(pos, left)
-        return ans.x if occ &gt;= threshold else -1
-    
-    def seg_build(self, idx: int, l: int, r: int):
-        arr_ = self.arr
-        tree_ = self.tree
-
-        if l == r:
-            tree_[idx] = Node(arr_[l], 1)
-            return
-        
-        mid = (l + r) // 2
-        self.seg_build(idx * 2 + 1, l, mid)
-        self.seg_build(idx * 2 + 2, mid + 1, r)
-        tree_[idx] += tree_[idx * 2 + 1]
-        tree_[idx] += tree_[idx * 2 + 2]
-
-    def seg_query(self, idx: int, l: int, r: int, ql: int, qr: int, ans: Node):
-        tree_ = self.tree
-
-        if l &gt; qr or r &lt; ql:
-            return
-        
-        if ql &lt;= l and r &lt;= qr:
-            ans += tree_[idx]
-            return
-
-        mid = (l + r) // 2
-        self.seg_query(idx * 2 + 1, l, mid, ql, qr, ans)
-        self.seg_query(idx * 2 + 2, mid + 1, r, ql, qr, ans)
-</code></pre>
-<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
-<p>想象力比知识更为重要。<br>        ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
-</blockquote>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -1039,7 +963,7 @@ class MajorityChecker:
   <div class="widget-box">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
+      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 13.33px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
     </div>
   </div>
 
@@ -1060,6 +984,10 @@ class MajorityChecker:
       <ul>
         
           <li>
+            <a href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/">1110-删点成林</a>
+          </li>
+        
+          <li>
             <a href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">1091-二进制矩阵中的最短路径</a>
           </li>
         
@@ -1073,10 +1001,6 @@ class MajorityChecker:
         
           <li>
             <a href="/2023/04/27/1048-%E6%9C%80%E9%95%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%93%BE/">1048-最长字符串链</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/24/1105-%E5%A1%AB%E5%85%85%E4%B9%A6%E6%9E%B6/">1105-填充书架</a>
           </li>
         
       </ul>
