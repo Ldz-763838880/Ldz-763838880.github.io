@@ -74,6 +74,96 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-2409-统计共同度过的日子数" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/17/2409-%E7%BB%9F%E8%AE%A1%E5%85%B1%E5%90%8C%E5%BA%A6%E8%BF%87%E7%9A%84%E6%97%A5%E5%AD%90%E6%95%B0/">2409-统计共同度过的日子数</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/04/17/2409-%E7%BB%9F%E8%AE%A1%E5%85%B1%E5%90%8C%E5%BA%A6%E8%BF%87%E7%9A%84%E6%97%A5%E5%AD%90%E6%95%B0/" class="article-date">
+  <time datetime="2023-04-17T06:31:21.000Z" itemprop="datePublished">2023-04-17</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>Alice 和 Bob 计划分别去罗马开会。</p>
+<p>给你四个字符串 arriveAlice ，leaveAlice ，arriveBob 和 leaveBob 。Alice 会在日期 arriveAlice 到 leaveAlice 之间在城市里（日期为闭区间），而 Bob 在日期 arriveBob 到 leaveBob 之间在城市里（日期为闭区间）。每个字符串都包含 5 个字符，格式为 “MM-DD” ，对应着一个日期的月和日。</p>
+<p>请你返回 Alice和 Bob 同时在罗马的天数。</p>
+<p>你可以假设所有日期都在 同一个 自然年，而且 不是 闰年。每个月份的天数分别为：[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] 。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：arriveAlice = &quot;08-15&quot;, leaveAlice = &quot;08-18&quot;, arriveBob = &quot;08-16&quot;, leaveBob = &quot;08-19&quot;
+输出：3
+解释：Alice 从 8 月 15 号到 8 月 18 号在罗马。Bob 从 8 月 16 号到 8 月 19 号在罗马，他们同时在罗马的日期为 8 月 16、17 和 18 号。所以答案为 3 。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-days-spent-together">力扣（LeetCode）2409.统计共同度过的日子数</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>前缀和<ul>
+<li>利用前缀和统计出每个月对应该年的天数，再加上天数得到日期具体是该年的哪一天</li>
+<li>用二个人离开日子的最小值减去到达日子的最大值即得到共同呆在罗马的日子</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(1）</li>
+<li>前缀和处理12个月对应天数，时间复杂度为常数</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(1)</li>
+<li>一年只有12个月，存储这些天数空间复杂度为常数</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// 前缀和模拟
+class Solution:
+    def countDaysTogether(self, arriveAlice: str, leaveAlice: str, arriveBob: str, leaveBob: str) -&gt; int:
+        datesOfMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        prefixSum = [0]
+        for date in datesOfMonths:
+            prefixSum.append(prefixSum[-1] + date)
+
+        arriveAliceDay = self.calculateDayOfYear(arriveAlice, prefixSum)
+        leaveAliceDay = self.calculateDayOfYear(leaveAlice, prefixSum)
+        arriveBobDay = self.calculateDayOfYear(arriveBob, prefixSum)
+        leaveBobDay = self.calculateDayOfYear(leaveBob, prefixSum)
+
+        return max(0, min(leaveAliceDay, leaveBobDay) - max(arriveAliceDay, arriveBobDay) + 1)
+
+
+    def calculateDayOfYear(self, day: str, prefixSum: List[int]) -&gt; int:
+        month = int(day[:2])
+        day = int(day[3:])
+        return prefixSum[month - 1] + day
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p> Intellectuals solve problems; geniuses prevent them（智者解决问题，天才预防问题）。<br>        ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-1157-子数组中占绝大多数的元素" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -490,7 +580,7 @@ class Solution:
   <div class="widget-box">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
     </div>
   </div>
 
@@ -500,7 +590,7 @@ class Solution:
   <div class="widget-box">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 13.33px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
+      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 13.33px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 10px;">单调栈</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
     </div>
   </div>
 
@@ -521,6 +611,10 @@ class Solution:
       <ul>
         
           <li>
+            <a href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/">1130-叶值的最小代价生成树</a>
+          </li>
+        
+          <li>
             <a href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/">1110-删点成林</a>
           </li>
         
@@ -534,10 +628,6 @@ class Solution:
         
           <li>
             <a href="/2023/05/14/1054-%E8%B7%9D%E7%A6%BB%E7%9B%B8%E7%AD%89%E7%9A%84%E6%9D%A1%E5%BD%A2%E7%A0%81/">1054-距离相等的条形码</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/27/1048-%E6%9C%80%E9%95%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%93%BE/">1048-最长字符串链</a>
           </li>
         
       </ul>

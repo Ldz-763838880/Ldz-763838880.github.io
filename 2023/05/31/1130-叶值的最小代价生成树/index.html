@@ -5,23 +5,29 @@
   
 
   
-  <title>归档: 2023/5 | 研の随笔</title>
+  <title>1130-叶值的最小代价生成树 | 研の随笔</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   <meta name="keywords" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女" />
   
-  <meta name="description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
-<meta property="og:type" content="website">
-<meta property="og:title" content="研の随笔">
-<meta property="og:url" content="http://example.com/archives/2023/05/index.html">
+  <meta name="description" content="1 题目描述给你一个正整数数组 arr，考虑所有满足以下条件的二叉树： 每个节点都有 0 个或是 2 个子节点。数组 arr 中的值与树的中序遍历中每个叶节点的值一一对应。每个非叶节点的值等于其左子树和右子树中叶节点的最大值的乘积。在所有这样的二叉树中，返回每个非叶节点的值的最小可能总和。这个和的值是一个 32 位整数。 如果一个节点有 0 个子节点，那么该节点为叶节点。 示例 输入：arr &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1130-叶值的最小代价生成树">
+<meta property="og:url" content="http://example.com/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/index.html">
 <meta property="og:site_name" content="研の随笔">
-<meta property="og:description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
+<meta property="og:description" content="1 题目描述给你一个正整数数组 arr，考虑所有满足以下条件的二叉树： 每个节点都有 0 个或是 2 个子节点。数组 arr 中的值与树的中序遍历中每个叶节点的值一一对应。每个非叶节点的值等于其左子树和右子树中叶节点的最大值的乘积。在所有这样的二叉树中，返回每个非叶节点的值的最小可能总和。这个和的值是一个 32 位整数。 如果一个节点有 0 个子节点，那么该节点为叶节点。 示例 输入：arr &#x3D;">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/08/10/tree1.jpg">
+<meta property="article:published_time" content="2023-05-31T02:21:31.000Z">
+<meta property="article:modified_time" content="2023-05-31T03:07:07.834Z">
 <meta property="article:author" content="Pluto">
-<meta property="article:tag" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="单调栈">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/08/10/tree1.jpg">
   
     <link rel="alternate" href="/atom.xml" title="研の随笔" type="application/atom+xml">
   
@@ -72,147 +78,185 @@
   </div>
 </header>
       <div id="middlecontent" title class="global-width sidebar-right">
-        <section id="main">
+        <section id="main"><article id="post-1130-叶值的最小代价生成树" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="global-container archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/">1130-叶值的最小代价生成树</a>
+    <h1 class="article-title" itemprop="name">
+      1130-叶值的最小代价生成树
     </h1>
   
-      
+
     </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/" class="article-date">
+  
+  <div class="article-meta">
+    <a href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/" class="article-date">
   <time datetime="2023-05-31T02:21:31.000Z" itemprop="datePublished">2023-05-31</time>
 </a>
-      
-      
+    
+    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li></ul>
 
-    </div>
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/">1110-删点成林</a>
-    </h1>
-  
-      
-    </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/" class="article-date">
-  <time datetime="2023-05-30T06:32:25.000Z" itemprop="datePublished">2023-05-30</time>
-</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
 
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个正整数数组 arr，考虑所有满足以下条件的二叉树：</p>
+<p>每个节点都有 0 个或是 2 个子节点。<br>数组 arr 中的值与树的中序遍历中每个叶节点的值一一对应。<br>每个非叶节点的值等于其左子树和右子树中叶节点的最大值的乘积。<br>在所有这样的二叉树中，返回每个非叶节点的值的最小可能总和。这个和的值是一个 32 位整数。</p>
+<p>如果一个节点有 0 个子节点，那么该节点为叶节点。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode.com/uploads/2021/08/10/tree1.jpg" alt="二叉树示例"></p>
+<pre><code class="diff">输入：arr = [6,2,4]
+输出：32
+解释：有两种可能的树，第一种的非叶节点的总和为 36 ，第二种非叶节点的总和为 32 。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values">力扣（LeetCode）1130.叶值的最小代价生成树</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>DP<ul>
+<li>自上而下建树</li>
+<li>首先考虑问题是将arr数组转化为叶子节点中序遍历的所有二叉树，所以可以将数组先划分任意二个非空子数组，分别作为左子树和右子树，不断递归直到子数组大小为1即为叶子节点，对应一个合法二叉树</li>
+<li>然后考虑动态规划方程，使用dp[i][j](i &lt; j )记录区间[i, j]子数组对应的最少代价和，则状态转移方程为：<ul>
+<li>dp[i][j] = 0, i = j</li>
+<li>dp[i][j] = min(dp[i][k] + dp[k + 1][j] + mval[i][k] * mval[k + 1][j]), i &lt;= k &lt; j, mval代表区间内的最大值</li>
+</ul>
+</li>
+<li>最后返回结果dp[0][n - 1]即为最小代价和</li>
+</ul>
+</li>
+<li>单调栈<ul>
+<li>自上而下建树</li>
+<li>首先考虑每次取arr相邻的二个数字x和y分别作为左右叶子节点，然后合并取最大值作为新arr值，重复上述步骤直到只剩下一个数则建树完成。所求的是建树过程每一步合并的代价之和即x * y最小</li>
+<li>然后考虑合并，当我们访问到arr[i] = x时，如果arr[i - 1] &gt;= x and arr[i + 1] &gt;= x， 则x需要和min(arr[i-1], arr[i + 1])进行合并才能保证代价最小</li>
+<li>接着考虑使用单调栈stack进行存储数组遍历时的过程结果<ul>
+<li>如果栈非空并且栈顶元素y &lt;= x， 则将栈顶元素y出栈<ul>
+<li>如果栈为空或栈顶元素 &gt; x ，则将 x 与 y 合并代价最小，为 x * y</li>
+<li>否则合并 y 与栈顶元素，合并代价为 stack[-1] * y</li>
+<li>操作结束后将 x 入栈</li>
+</ul>
+</li>
+<li>最后得到一个严格递减的单调栈，如果长度 &gt; 2，则表示还有节点需要合并，此时只要按照顺序合并并计算合并代价即可</li>
+</ul>
+</li>
+<li>最后返回总的合并代价即为最小的合并代价值</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>DP<ul>
+<li>O(n^3)</li>
+<li>三重循环</li>
+</ul>
+</li>
+<li>单调栈<ul>
+<li>O(n)</li>
+<li>所有元素遍历一遍执行入栈 + 出栈的操作 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>DP<ul>
+<li>O(n^2)</li>
+<li>动态规划数组空间大小 n X n</li>
+</ul>
+</li>
+<li>单调栈<ul>
+<li>O(n)</li>
+<li>栈空间需要O(n)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP / 单调栈
+class Solution:
+    def mctFromLeafValues(self, arr: List[int]) -&gt; int:
+        #  DP
+        n = len(arr)
+        dp = [[inf for _ in range(n)] for _ in range(n)]
+        mval = [[0 for _ in range(n)] for _ in range(n)]
+        for j in range(n):
+            mval[j][j] = arr[j]
+            dp[j][j] = 0
+            for i in range(j - 1, -1, -1):
+                mval[i][j] = max(arr[i], mval[i + 1][j])
+                for k in range(i, j):
+                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + mval[i][k] * mval[k + 1][j])
+        return dp[0][n - 1]
+
+
+        #  单调栈
+        res = 0
+        stack = []
+        for x in arr:
+            while stack and stack[-1] &lt;= x:
+                y = stack.pop()
+                if not stack or stack[-1] &gt; x:
+                    res += x * y
+                else:
+                    res += stack[-1] * y
+            stack.append(x)
+        while len(stack) &gt;= 2:
+            x = stack.pop()
+            res += stack[-1] * x
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “It would not be much of a universe if it wasn’t home to the people you love.”(如果宇宙不是你所爱的人的家，那宇宙就没有什么意义了。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
     </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
   </div>
-</article>
   
     
+<nav id="article-nav">
+  <div class="article-nav-block">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">1091-二进制矩阵中的最短路径</a>
-    </h1>
-  
-      
-    </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" class="article-date">
-  <time datetime="2023-05-26T07:34:34.000Z" itemprop="datePublished">2023-05-26</time>
-</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
-
-    </div>
   </div>
-</article>
-  
+  <div class="article-nav-block">
     
+      <a href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">1110-删点成林</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/15/Djangon-Vue-Admin%E5%BC%80%E5%8F%91/">Djangon-Vue-Admin开发</a>
-    </h1>
-  
-      
-    </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2023/05/15/Djangon-Vue-Admin%E5%BC%80%E5%8F%91/" class="article-date">
-  <time datetime="2023-05-15T09:52:16.000Z" itemprop="datePublished">2023-05-15</time>
-</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
-
-    </div>
   </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/14/1054-%E8%B7%9D%E7%A6%BB%E7%9B%B8%E7%AD%89%E7%9A%84%E6%9D%A1%E5%BD%A2%E7%A0%81/">1054-距离相等的条形码</a>
-    </h1>
-  
-      
-    </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2023/05/14/1054-%E8%B7%9D%E7%A6%BB%E7%9B%B8%E7%AD%89%E7%9A%84%E6%9D%A1%E5%BD%A2%E7%A0%81/" class="article-date">
-  <time datetime="2023-05-14T07:57:09.000Z" itemprop="datePublished">2023-05-14</time>
-</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li></ul>
-
-    </div>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
 </section>
         <aside id="sidebar">
   
