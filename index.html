@@ -74,6 +74,103 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-1186-删除一次得到子数组最大和" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1186-删除一次得到子数组最大和</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/" class="article-date">
+  <time datetime="2023-06-27T02:49:40.000Z" itemprop="datePublished">2023-06-27</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个整数数组，返回它的某个 非空 子数组（连续元素）在执行一次可选的删除操作后，所能得到的最大元素总和。换句话说，你可以从原数组中选出一个子数组，并可以决定要不要从中删除一个元素（只能删一次哦），（删除后）子数组中至少应当有一个元素，然后该子数组（剩下）的元素总和是所有子数组之中最大的。</p>
+<p>注意，删除一个元素后，子数组 不能为空。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：arr = [1,-2,0,3]
+输出：4
+解释：我们可以选出 [1, -2, 0, 3]，然后删掉 -2，这样得到 [1, 0, 3]，和最大。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray-sum-with-one-deletion">力扣（LeetCode）1186.删除一次得到子数组最大和</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>DP<ul>
+<li> 将问题拆分成多个子问题，即求解以 arr[i]结尾的最多删除一次的非空子数组的最大和。</li>
+<li> 状态：使用dp[i][k]表示以arr[i]为结尾的删除k次元素后的子数组最大值</li>
+<li>边界条件：<br>  dp[0][0] = arr[0]<br>  dp[0][1] = 0</li>
+<li>状态转移方程：<br>  dp[i][0] = max(dp[i - 1][0], 0) + arr[i]<br>  dp[i][1] = max(dp[i - 1][1] + arr[i], dp[i - 1][0])</li>
+<li> 由于dp[i]只与dp[i -1]有关，所以可以使用二个整数变量来转移</li>
+<li> 最后返回过程中一直记录的最大值即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li><p>时间复杂度</p>
+<ul>
+<li>DP<ul>
+<li>O(n)</li>
+<li>数组长度为n</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>空间复杂度</p>
+<ul>
+<li>DP<ul>
+<li>O(1)</li>
+<li>二个变量即可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP 
+class Solution:
+    def maximumSum(self, arr: List[int]) -&gt; int:
+        &quot;&quot;&quot;
+        dp[i][k]表示以arr[i]为结尾的删除k次元素后的子数组最大值
+        dp[0][0] = arr[0]
+        dp[0][1] = 0
+        dp[i][0] = max(dp[i - 1][0], 0) + arr[i]
+        dp[i][1] = max(dp[i - 1][1] + arr[i], dp[i - 1][0])
+        &quot;&quot;&quot;
+        n = len(arr)
+        dp0, dp1, res = arr[0], 0, arr[0]
+        for i in range(1, n):
+            dp1 = max(dp1 + arr[i], dp0)
+            dp0 = max(dp0, 0) + arr[i]
+            res = max(res, max(dp0, dp1))
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “The thing about smart people is that they seem like crazy people to dumb people.” (聪明人的特质就是，在笨蛋眼里他们看起来像疯子。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-1262-可被三整除的最大和" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -917,86 +1014,6 @@ class Solution:
 </article>
 
   
-    <article id="post-1043-分隔数组以得到最大和" class="article global-container article-type-post" itemscope itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/19/1043-%E5%88%86%E9%9A%94%E6%95%B0%E7%BB%84%E4%BB%A5%E5%BE%97%E5%88%B0%E6%9C%80%E5%A4%A7%E5%92%8C/">1043-分隔数组以得到最大和</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2023/04/19/1043-%E5%88%86%E9%9A%94%E6%95%B0%E7%BB%84%E4%BB%A5%E5%BE%97%E5%88%B0%E6%9C%80%E5%A4%A7%E5%92%8C/" class="article-date">
-  <time datetime="2023-04-19T12:48:21.000Z" itemprop="datePublished">2023-04-19</time>
-</a>
-    
-    
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个整数数组 arr，请你将该数组分隔为长度 最多 为 k 的一些（连续）子数组。分隔完成后，每个子数组的中的所有值都会变为该子数组中的最大值。</p>
-<p>返回将数组分隔变换后能够得到的元素最大和。本题所用到的测试用例会确保答案是一个 32 位整数。</p>
-<p><strong>示例</strong></p>
-<pre><code class="diff">输入：arr = [1,15,7,9,2,5,10], k = 3
-输出：84
-解释：数组变为 [15,15,15,9,10,10,10]
-</code></pre>
-<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-array-for-maximum-sum">力扣（LeetCode）1043.分隔数组以得到最大和</a><br><a id="jump_8"></a></p>
-<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
-<li>动态规划<ul>
-<li>考虑将第i个元素当作当前数组最后一个元素进行划分，从第[i - k, i - 1]范围内枚举arr[j],用maVal记录以arr[j]结尾的最大数组值并求和从而进行更新d[i]</li>
-<li>状态转移方程：d[i] = max(d[i], d[j] + maxVal * (i - j))</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
-<li>时间复杂度<ul>
-<li>O(nk）</li>
-<li>数组有n个元素，每个元素倒序遍历前面k个元素</li>
-</ul>
-</li>
-<li>空间复杂度<ul>
-<li>O(n)</li>
-<li>dp数组空间大小n，记录对应位置的最大数组求和值</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP
-class Solution:
-    def maxSumAfterPartitioning(self, arr: List[int], k: int) -&gt; int:
-        n = len(arr)
-        d = [0] * (n + 1)
-        for i in range(1, n + 1):
-            maxVal = arr[i - 1]
-            for j in range(i - 1, max(-1, i - k - 1), -1):
-                d[i] = max(d[i], d[j] + maxVal * (i - j))
-                if j &gt; 0:
-                    maxVal = max(maxVal, arr[j - 1])
-        return d[n]
-</code></pre>
-<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
-<p>   I never think of the future. It comes soon enough.（我从不去想未来, 因为它来得已经够快的了）<br>        ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
-</blockquote>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -1062,6 +1079,10 @@ class Solution:
       <ul>
         
           <li>
+            <a href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1186-删除一次得到子数组最大和</a>
+          </li>
+        
+          <li>
             <a href="/2023/06/19/1262-%E5%8F%AF%E8%A2%AB%E4%B8%89%E6%95%B4%E9%99%A4%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1262-可被三整除的最大和</a>
           </li>
         
@@ -1075,10 +1096,6 @@ class Solution:
         
           <li>
             <a href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">1091-二进制矩阵中的最短路径</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/15/Djangon-Vue-Admin%E5%BC%80%E5%8F%91/">Djangon-Vue-Admin开发</a>
           </li>
         
       </ul>
