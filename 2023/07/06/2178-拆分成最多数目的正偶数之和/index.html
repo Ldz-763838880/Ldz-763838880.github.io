@@ -5,22 +5,25 @@
   
 
   
-  <title>标签: 单调栈 | 研の随笔</title>
+  <title>2178-拆分成最多数目的正偶数之和 | 研の随笔</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   <meta name="keywords" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女" />
   
-  <meta name="description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
-<meta property="og:type" content="website">
-<meta property="og:title" content="研の随笔">
-<meta property="og:url" content="http://example.com/tags/%E5%8D%95%E8%B0%83%E6%A0%88/index.html">
+  <meta name="description" content="1 题目描述给你一个整数 finalSum 。请你将它拆分成若干个 互不相同 的正偶数之和，且拆分出来的正偶数数目 最多 。 比方说，给你 finalSum &#x3D; 12 ，那么这些拆分是 符合要求 的（互不相同的正偶数且和为 finalSum）：(2 + 10) ，(2 + 4 + 6) 和 (4 + 8) 。它们中，(2 + 4 + 6) 包含最多数目的整数。注意 finalSum 不能拆分成 (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2178-拆分成最多数目的正偶数之和">
+<meta property="og:url" content="http://example.com/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/index.html">
 <meta property="og:site_name" content="研の随笔">
-<meta property="og:description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
+<meta property="og:description" content="1 题目描述给你一个整数 finalSum 。请你将它拆分成若干个 互不相同 的正偶数之和，且拆分出来的正偶数数目 最多 。 比方说，给你 finalSum &#x3D; 12 ，那么这些拆分是 符合要求 的（互不相同的正偶数且和为 finalSum）：(2 + 10) ，(2 + 4 + 6) 和 (4 + 8) 。它们中，(2 + 4 + 6) 包含最多数目的整数。注意 finalSum 不能拆分成 (">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-06T02:37:19.000Z">
+<meta property="article:modified_time" content="2023-07-06T02:51:44.483Z">
 <meta property="article:author" content="Pluto">
-<meta property="article:tag" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="研の随笔" type="application/atom+xml">
@@ -72,47 +75,141 @@
   </div>
 </header>
       <div id="middlecontent" title class="global-width sidebar-right">
-        <section id="main">
+        <section id="main"><article id="post-2178-拆分成最多数目的正偶数之和" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="global-container archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/">1130-叶值的最小代价生成树</a>
+    <h1 class="article-title" itemprop="name">
+      2178-拆分成最多数目的正偶数之和
     </h1>
   
-      
+
     </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/" class="article-date">
-  <time datetime="2023-05-31T02:21:31.000Z" itemprop="datePublished">2023-05-31</time>
+  
+  <div class="article-meta">
+    <a href="/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/" class="article-date">
+  <time datetime="2023-07-06T02:37:19.000Z" itemprop="datePublished">2023-07-06</time>
 </a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li></ul>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
 
-    </div>
   </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个整数 finalSum 。请你将它拆分成若干个 互不相同 的正偶数之和，且拆分出来的正偶数数目 最多 。</p>
+<p>比方说，给你 finalSum = 12 ，那么这些拆分是 符合要求 的（互不相同的正偶数且和为 finalSum）：(2 + 10) ，(2 + 4 + 6) 和 (4 + 8) 。它们中，(2 + 4 + 6) 包含最多数目的整数。注意 finalSum 不能拆分成 (2 + 2 + 4 + 4) ，因为拆分出来的整数必须互不相同。<br>请你返回一个整数数组，表示将整数拆分成 最多 数目的正偶数数组。如果没有办法将 finalSum 进行拆分，请你返回一个 空 数组。你可以按 任意 顺序返回这些整数。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：finalSum = 12
+输出：[2,4,6]
+解释：以下是一些符合要求的拆分：(2 + 10)，(2 + 4 + 6) 和 (4 + 8) 。
+(2 + 4 + 6) 为最多数目的整数，数目为 3 ，所以我们返回 [2,4,6] 。
+[2,6,4] ，[6,2,4] 等等也都是可行的解。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-split-of-positive-even-integers/description/">力扣（LeetCode）2178.拆分成最多数目的正偶数之和</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>贪心<ul>
+<li> 问题求最多的不重复偶数和，则可以考虑贪心思想</li>
+<li> 首先从2开始添加，每次增加2直到当前偶数大于finalnum的剩余值，表示偶数长度达到最长了</li>
+<li> 然后需要考虑最后一次添加的偶数res[-1]，由于继续添加res[-1]+2会大于剩余finalnum,所以考虑直接将res[-1]修改为res[-1] + finalnum，即最后的符合条件偶数</li>
+<li> 最后直接返回数组即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li><p>时间复杂度</p>
+<ul>
+<li>O(√n)</li>
+<li>循环次数k,则2（k * (k + 1) / 2) = n,所以k为√n，时间复杂度为√n</li>
+</ul>
+</li>
+<li><p>空间复杂度</p>
+<ul>
+<li>O(1)</li>
+<li>输出数组不计入空间复杂度</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// 贪心 
+class Solution:
+    def maximumEvenSplit(self, finalSum: int) -&gt; List[int]:
+        res = []
+        if finalSum % 2 != 0:
+            return res
+        i = 2
+        while i &lt;= finalSum:
+            res.append(i)
+            finalSum -= i
+            i += 2
+        res[-1] += finalSum
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   Quiet people have the loudest minds.”(沉默的人拥有最掷地有声的头脑。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            931-下降路径最小和
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">1186-删除一次得到子数组最大和</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
 </article>
-  
-  
-    </div></section>
-  
-
-
 </section>
         <aside id="sidebar">
   

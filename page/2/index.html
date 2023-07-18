@@ -74,6 +74,270 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-1048-最长字符串链" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/27/1048-%E6%9C%80%E9%95%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%93%BE/">1048-最长字符串链</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/04/27/1048-%E6%9C%80%E9%95%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%93%BE/" class="article-date">
+  <time datetime="2023-04-27T09:22:02.000Z" itemprop="datePublished">2023-04-27</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给出一个单词数组 words ，其中每个单词都由小写英文字母组成。</p>
+<p>如果我们可以 不改变其他字符的顺序 ，在 wordA 的任何地方添加 恰好一个 字母使其变成 wordB ，那么我们认为 wordA 是 wordB 的 前身 。</p>
+<p>例如，”abc” 是 “abac” 的 前身 ，而 “cba” 不是 “bcad” 的 前身<br>词链是单词 [word_1, word_2, …, word_k] 组成的序列，k &gt;= 1，其中 word1 是 word2 的前身，word2 是 word3 的前身，依此类推。一个单词通常是 k == 1 的 单词链 。</p>
+<p>从给定单词列表 words 中选择单词组成词链，返回 词链的 最长可能长度 。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：words = [&quot;a&quot;,&quot;b&quot;,&quot;ba&quot;,&quot;bca&quot;,&quot;bda&quot;,&quot;bdca&quot;]
+输出：4
+解释：最长单词链之一为 [&quot;a&quot;,&quot;ba&quot;,&quot;bda&quot;,&quot;bdca&quot;]
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://https//leetcode.cn/problems/longest-string-chain">力扣（LeetCode）1048.最长字符串链</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>动态规划<ul>
+<li>首先考虑以单词word为结尾的词链，则前一个词必然是word减一个单词的，每个单词的初始最大词链长度都为1</li>
+<li>然后考虑使用字典cnt存储单词word为尾部词链结尾时的最大长度，通过减少当前word的字母去查找前一个单词是否cnt出现过，出现过则最大长度须更新</li>
+<li>动态规划递归方程为：cnt[word] = max(cnt[word], cnt[pre_word]+1],pre_word = {word依次减少一个字母集合}</li>
+<li>最后使用中间变量比较每个cnt[word]并记录最大值即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(n X m X (log n + m))</li>
+<li>n代表单词个数，m表示单词平均长度，排序时间复杂度n X m X logn，每个单词需要查询其前身并比较时间复杂度n X m X m</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(n X m)</li>
+<li>存储n个单词，每个单词平均长度m，需要空间n X m</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP
+class Solution:
+    def longestStrChain(self, words: List[str]) -&gt; int:
+        cnt = defaultdict(int)
+        words.sort(key = len)
+        res = 0
+        for word in words:
+            cnt[word] = 1
+            for i in range(len(word)):
+                pre = word[:i] + word[i + 1:]
+                if pre in cnt:
+                    cnt[word] = max(cnt[word], cnt[pre] + 1)
+            res = max(res, cnt[word])
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   The real talent is resolute aspirations.（真正的才智是刚毅的志向。）<br>        ——拿破仑（1769.8.15——1821.5.5）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1105-填充书架" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/24/1105-%E5%A1%AB%E5%85%85%E4%B9%A6%E6%9E%B6/">1105-填充书架</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/04/24/1105-%E5%A1%AB%E5%85%85%E4%B9%A6%E6%9E%B6/" class="article-date">
+  <time datetime="2023-04-24T07:30:53.000Z" itemprop="datePublished">2023-04-24</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给定一个数组 books ，其中 books[i] = [thicknessi, heighti] 表示第 i 本书的厚度和高度。你也会得到一个整数 shelfWidth 。</p>
+<p>按顺序 将这些书摆放到总宽度为 shelfWidth 的书架上。</p>
+<p>先选几本书放在书架上（它们的厚度之和小于等于书架的宽度 shelfWidth ），然后再建一层书架。重复这个过程，直到把所有的书都放在书架上。</p>
+<p>需要注意的是，在上述过程的每个步骤中，摆放书的顺序与你整理好的顺序相同。</p>
+<p>例如，如果这里有 5 本书，那么可能的一种摆放情况是：第一和第二本书放在第一层书架上，第三本书放在第二层书架上，第四和第五本书放在最后一层书架上。<br>每一层所摆放的书的最大高度就是这一层书架的层高，书架整体的高度为各层高之和。</p>
+<p>以这种方式布置书架，返回书架整体可能的最小高度。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode.com/uploads/2019/06/24/shelves.png" alt="书架摆放"></p>
+<pre><code class="diff">输入：books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelfWidth = 4
+输出：6
+解释：
+3 层书架的高度和为 1 + 3 + 2 = 6 。
+第 2 本书不必放在第一层书架上。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/filling-bookcase-shelves">力扣（LeetCode）1105.填充书架</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>动态规划<ul>
+<li>首先考虑使用dp存储放到第i本书时的最低高度</li>
+<li>其次考虑按照书的顺序进行遍历，当放到第i本书时，前j本书的最低高度dp[j] + j &lt;= k &lt;= i 区间书的最大高度就是当前第i本书的最低高度值</li>
+<li>动态规划递归方程为：dp[i] = min(dp[i], dp[j] + maxHig(j&lt;= k &lt;= i)]</li>
+<li>最后返回dp[n]就是n本书的最低高度值</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(n^2）</li>
+<li>n本书，每本书需要遍历前面的书</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(n)</li>
+<li>存储n本书的最低高度数组dp</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP
+class Solution:
+    def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -&gt; int:
+        n = len(books)
+        dp = [inf] *(n + 1)
+        dp[0] = 0
+        for i, b in enumerate(books):
+            curWid, maxHig = 0, 0
+            j = i
+            while j &gt;= 0:
+                curWid += books[j][0]
+                if curWid &gt; shelfWidth:
+                    break
+                maxHig = max(maxHig, books[j][1])
+                dp[i + 1] = min(dp[i + 1], dp[j] + maxHig)
+                j -= 1
+        return dp[n]
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   The only thing that interferes with my learning is my education.（妨碍我学习的唯一障碍就是我的教育。）<br>        ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1027-最长等差数列" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/22/1027-%E6%9C%80%E9%95%BF%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97/">1027-最长等差数列</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/04/22/1027-%E6%9C%80%E9%95%BF%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97/" class="article-date">
+  <time datetime="2023-04-22T07:58:06.000Z" itemprop="datePublished">2023-04-22</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个整数数组 nums，返回 nums 中最长等差子序列的长度。</p>
+<p>回想一下，nums 的子序列是一个列表 nums[i1], nums[i2], …, nums[ik] ，且 0 &lt;= i1 &lt; i2 &lt; … &lt; ik &lt;= nums.length - 1。并且如果 seq[i+1] - seq[i]( 0 &lt;= i &lt; seq.length - 1) 的值都相同，那么序列 seq 是等差的。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：nums = [3,6,9,12]
+输出：4
+解释：
+整个数组是公差为 3 的等差数列。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-arithmetic-subsequence">力扣（LeetCode）1027.最长等差数列</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>动态规划<ul>
+<li>首先可以确定等差子序列的公差范围是[-diff, diff] , diff = max(nums) - min(nums)，可以使用字典f来存储以num为结尾的最长子序列长度</li>
+<li>其次考虑访问到数组第i个元素时如果将当前num作为最后一个等差元素加入子序列，则f[num] = max(f[num], f[num - d] + 1)，若不加入则f[num] = max(f[num], 1)</li>
+<li>最后在遍历中用ans记录f[num]的最大值即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(nC）</li>
+<li>数组有n个元素，等差子序列公差范围为C</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(n)</li>
+<li>哈希表f的空间为n个元素</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP
+class Solution:
+    def longestArithSeqLength(self, nums: List[int]) -&gt; int:
+        minv, maxv = min(nums), max(nums)
+        diff = maxv - minv
+        ans = 1
+
+        for d in range(-diff, diff + 1):
+            f = dict()
+            for num in nums:
+                if (prev := num - d)  in f:
+                    f[num] = max(f.get(num, 0), f[prev] + 1)
+                    ans = max(ans, f[num])
+                f[num] = max(f.get(num, 0), 1)
+        return ans
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   Two things are infinite: the universe and human stupidity; and I’m not sure about the universe.（宇宙中唯有两件事物是无限的：宇宙的大小与人的愚蠢，我不能确定的是宇宙的大小。）<br>        ——阿尔伯特·爱因斯坦（1879.3.14——1955.4.18）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-1043-分隔数组以得到最大和" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -753,7 +1017,7 @@ class Solution:
   <div class="widget-box">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="tag">优先队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E7%BA%BF%E6%9F%A5%E8%AF%A2/" rel="tag">离线查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
     </div>
   </div>
 
@@ -763,7 +1027,7 @@ class Solution:
   <div class="widget-box">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 13.33px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 10px;">单调栈</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
+      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 13.33px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" style="font-size: 10px;">优先队列</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 10px;">单调栈</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%A6%BB%E7%BA%BF%E6%9F%A5%E8%AF%A2/" style="font-size: 10px;">离线查询</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 13.33px;">贪心</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
     </div>
   </div>
 
@@ -772,7 +1036,7 @@ class Solution:
   <div class="widget-box">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li></ul>
     </div>
   </div>
 
@@ -784,23 +1048,23 @@ class Solution:
       <ul>
         
           <li>
+            <a href="/2023/07/18/1851-%E5%8C%85%E5%90%AB%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%BA%E9%97%B4/">1851-包含每个查询的最小区间</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/">931-下降路径最小和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/">2178-拆分成最多数目的正偶数之和</a>
+          </li>
+        
+          <li>
             <a href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1186-删除一次得到子数组最大和</a>
           </li>
         
           <li>
             <a href="/2023/06/19/1262-%E5%8F%AF%E8%A2%AB%E4%B8%89%E6%95%B4%E9%99%A4%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1262-可被三整除的最大和</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/">1130-叶值的最小代价生成树</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/">1110-删点成林</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">1091-二进制矩阵中的最短路径</a>
           </li>
         
       </ul>
