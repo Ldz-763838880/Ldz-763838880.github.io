@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>931-下降路径最小和 | 研の随笔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="keywords" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女" />
+  
+  <meta name="description" content="1 题目描述给你一个 n x n 的 方形 整数数组 matrix ，请你找出并返回通过 matrix 的下降路径 的 最小和 。 下降路径 可以从第一行中的任何元素开始，并从每一行中选择一个元素。在下一行选择的元素和当前行所选元素最多相隔一列（即位于正下方或者沿对角线向左或者向右的第一个元素）。具体来说，位置 (row, col) 的下一个元素应当是 (row + 1, col - 1)、(ro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="931-下降路径最小和">
+<meta property="og:url" content="http://example.com/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/index.html">
+<meta property="og:site_name" content="研の随笔">
+<meta property="og:description" content="1 题目描述给你一个 n x n 的 方形 整数数组 matrix ，请你找出并返回通过 matrix 的下降路径 的 最小和 。 下降路径 可以从第一行中的任何元素开始，并从每一行中选择一个元素。在下一行选择的元素和当前行所选元素最多相隔一列（即位于正下方或者沿对角线向左或者向右的第一个元素）。具体来说，位置 (row, col) 的下一个元素应当是 (row + 1, col - 1)、(ro">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/11/03/failing1-grid.jpg">
+<meta property="article:published_time" content="2023-07-13T01:30:43.000Z">
+<meta property="article:modified_time" content="2023-07-13T01:40:04.433Z">
+<meta property="article:author" content="Pluto">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/11/03/failing1-grid.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="研の随笔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/20221021-1.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/highlight.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/20221121-5.jpg)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title
+        
+        >首页</a>
+      
+        <a class="nav-item" href="/archives" title
+        
+        >归档</a>
+      
+        <a class="nav-item" href="/null" title
+        
+        >标签</a>
+      
+        <a class="nav-item" href="/" title
+        
+        >关于</a>
+      
+        <a class="nav-item" href="/" title
+        
+        >友链</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-931-下降路径最小和" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      931-下降路径最小和
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/" class="article-date">
+  <time datetime="2023-07-13T01:30:43.000Z" itemprop="datePublished">2023-07-13</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个 n x n 的 方形 整数数组 matrix ，请你找出并返回通过 matrix 的下降路径 的 最小和 。</p>
+<p>下降路径 可以从第一行中的任何元素开始，并从每一行中选择一个元素。在下一行选择的元素和当前行所选元素最多相隔一列（即位于正下方或者沿对角线向左或者向右的第一个元素）。<br>具体来说，位置 (row, col) 的下一个元素应当是 (row + 1, col - 1)、(row + 1, col) 或者 (row + 1, col + 1) 。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode.com/uploads/2021/11/03/failing1-grid.jpg" alt="方形数组示例"></p>
+<pre><code class="diff">输入：matrix = [[2,1,3],[6,5,4],[7,8,9]]
+输出：13
+解释：如图所示，为和最小的两条下降路径
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-falling-path-sum/description/">力扣（LeetCode）931.下降路径最小和</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>简单DP<ul>
+<li>dp[i][j]表示到达当前matrix[i][j]时的最小路径和状态，</li>
+<li>初始状态，dp[0] = matrix[0]</li>
+<li>状态转移方程：<ul>
+<li>dp[i][j] = min(dp[i][j], min(dp[i-1][j], dp[i - 1][j - 1], dp[i - 1][j + 1]) + matrix[i][j]))</li>
+<li>这里需要考虑关于j是否越界的问题，分情况讨论</li>
+</ul>
+</li>
+<li>最后返回结果dp[-1]里的最小值即为最小路径和</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>DP<ul>
+<li>O(n^2)</li>
+<li>遍历一遍矩阵</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>DP<ul>
+<li>O(n^2)</li>
+<li>动态规划数组空间大小 n X n</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP 
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -&gt; int:
+        n = len(matrix)
+        dp = [[inf] * n for _ in range(n)]
+        for i in range(n):
+            if i == 0 :
+                for k in range(n):
+                    dp[0][k] = matrix[0][k]
+            else:
+                for j in range(n):
+                    if 0 &lt; j &lt; n - 1:
+                        dp[i][j] = min(dp[i][j], min(dp[i - 1][j - 1], dp[i - 1][j], dp[i - 1][j + 1]) + matrix[i][j])
+                    elif j == 0:
+                        dp[i][j] = min(dp[i][j], min(dp[i - 1][j], dp[i - 1][j + 1]) + matrix[i][j])
+                    else:
+                        dp[i][j] = min(dp[i][j], min(dp[i - 1][j], dp[i - 1][j - 1]) + matrix[i][j])
+        return min(dp[n - 1])
+
+        # # # # # # # #
+        dp = [matrix[0]]
+        n = len(matrix[0])
+        for i in range(1, n):
+            cur = [0] * n
+            for j in range(n):
+                mn = dp[-1][j]
+                if j &gt; 0:
+                    mn = min(mn, dp[i - 1][j - 1])
+                if j &lt; n - 1:
+                    mn = min(mn, dp[i - 1][j + 1])
+                cur[j] = mn + matrix[i][j]
+            dp.append(cur)
+        return min(dp[-1])
+                      
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “Quiet people have the loudest minds.”（沉默的人拥有最掷地有声的头脑。）<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2023/07/18/1851-%E5%8C%85%E5%90%AB%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%BA%E9%97%B4/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            1851-包含每个查询的最小区间
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">2178-拆分成最多数目的正偶数之和</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/20221021-1.jpg" title="图片来自网络"></img>
+    <h3 class="avatar-name">
+      
+        Pluto
+      
+    </h3>
+    <p class="avatar-slogan">
+      Universe
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="tag">优先队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E7%BA%BF%E6%9F%A5%E8%AF%A2/" rel="tag">离线查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 13.33px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" style="font-size: 10px;">优先队列</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 10px;">单调栈</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 10px;">双指针</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%A6%BB%E7%BA%BF%E6%9F%A5%E8%AF%A2/" style="font-size: 10px;">离线查询</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 13.33px;">贪心</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/29/823-%E5%B8%A6%E5%9B%A0%E5%AD%90%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/">823-带因子的二叉树</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/18/1851-%E5%8C%85%E5%90%AB%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%BA%E9%97%B4/">1851-包含每个查询的最小区间</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/">931-下降路径最小和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/">2178-拆分成最多数目的正偶数之和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1186-删除一次得到子数组最大和</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://yiluyanxia.github.io/" title target='_blank'
+        >一路眼瞎</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2023 Pluto &nbsp;&nbsp;
+    驱动于 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a target="_blank" rel="noopener" href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/null" class="mobile-nav-link">标签</a>
+  
+    <a href="/" class="mobile-nav-link">关于</a>
+  
+    <a href="/" class="mobile-nav-link">友链</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>

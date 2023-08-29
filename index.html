@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>研の随笔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="keywords" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女" />
+  
+  <meta name="description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
+<meta property="og:type" content="website">
+<meta property="og:title" content="研の随笔">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="研の随笔">
+<meta property="og:description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Pluto">
+<meta property="article:tag" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="研の随笔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/20221021-1.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/highlight.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/20221121-5.jpg)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title
+        
+        >首页</a>
+      
+        <a class="nav-item" href="/archives" title
+        
+        >归档</a>
+      
+        <a class="nav-item" href="/null" title
+        
+        >标签</a>
+      
+        <a class="nav-item" href="/" title
+        
+        >关于</a>
+      
+        <a class="nav-item" href="/" title
+        
+        >友链</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main">
+  
+    <article id="post-823-带因子的二叉树" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/08/29/823-%E5%B8%A6%E5%9B%A0%E5%AD%90%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/">823-带因子的二叉树</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/08/29/823-%E5%B8%A6%E5%9B%A0%E5%AD%90%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/" class="article-date">
+  <time datetime="2023-08-29T02:43:14.000Z" itemprop="datePublished">2023-08-29</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给出一个含有不重复整数元素的数组 arr ，每个整数 arr[i] 均大于 1。</p>
+<p>用这些整数来构建二叉树，每个整数可以使用任意次数。其中：每个非叶结点的值应等于它的两个子结点的值的乘积。</p>
+<p>满足条件的二叉树一共有多少个？答案可能很大，返回 对 10^9 + 7 取余 的结果。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入: arr = [2, 4]
+输出: 3
+解释: 可以得到这些二叉树: [2], [4], [4, 2, 2]
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-trees-with-factors/description/">力扣（LeetCode）823.带因子的二叉树</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>DP + 双指针<ul>
+<li>思路：容易想到对应数字arr[i]其子节点一定是小于它的二个因子，所以先将数组排序，然后遍历，对每个arr[i]用双指针找出[0, i - 1]区间的所有满足条件的因子</li>
+<li>dp[i]表示当前arr[i]为根节点的所有情况，初始值为1</li>
+<li>状态转移方程：<ul>
+<li>每找到一对满足条件的因子[arr[left], arr[right]]时需要判断left == right,相等则 dp[left] x deft[right],不相等则由于可交换左右节点，所以要乘以2</li>
+<li>综上，转移方程为：<ul>
+<li>dp[i] = dp[i] + dp[left] x dp[right] * ( 1 + left == right)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>每遍历一个数字arr[i]都要记录结果数，最后返回总结果和即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>DP<ul>
+<li>O(n^2)</li>
+<li>循环数组加上双指针再遍历一次</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>DP<ul>
+<li>O(n)</li>
+<li>动态规划数组空间大小 n</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP + 双指针
+class Solution:
+    def numFactoredBinaryTrees(self, arr: List[int]) -&gt; int:
+        arr.sort()
+        n = len(arr)
+        dp = [1] * n
+        res, mod = 0, 10 ** 9 + 7
+        for i in range(n):
+            left, right = 0, i - 1
+            while left &lt;= right:
+                while right &gt;= left and arr[left] * arr[right] &gt; arr[i]:
+                    right -= 1
+                if right &gt;= left and arr[left] * arr[right] == arr[i]:
+                    if left == right:
+                        dp[i] = (dp[i] + dp[left] * dp[right]) % mod
+                    else:
+                        dp[i] = (dp[i] + dp[left] * dp[right] * 2) % mod
+                left += 1
+            res = (res + dp[i]) % mod
+        return res
+                      
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “I have noticed that even people who claim everything is predetermined and that we can do nothing to change it, look before they cross the road.”<br>（“我注意到，即使那些声称一切都已注定、人力无法改变天意的人在过马路的时候还是会左看右看。” —— From Black Holes and Baby Universes and Other Essays）<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1851-包含每个查询的最小区间" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/18/1851-%E5%8C%85%E5%90%AB%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%BA%E9%97%B4/">1851-包含每个查询的最小区间</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/07/18/1851-%E5%8C%85%E5%90%AB%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%BA%E9%97%B4/" class="article-date">
+  <time datetime="2023-07-18T01:55:16.000Z" itemprop="datePublished">2023-07-18</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="tag">优先队列</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A6%BB%E7%BA%BF%E6%9F%A5%E8%AF%A2/" rel="tag">离线查询</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个二维整数数组 intervals ，其中 intervals[i] = [lefti, righti] 表示第 i 个区间开始于 lefti 、结束于 righti（包含两侧取值，闭区间）。区间的 长度 定义为区间中包含的整数数目，更正式地表达是 righti - lefti + 1 。</p>
+<p>再给你一个整数数组 queries 。第 j 个查询的答案是满足 lefti &lt;= queries[j] &lt;= righti 的 长度最小区间 i 的长度 。如果不存在这样的区间，那么答案是 -1 。</p>
+<p>以数组形式返回对应查询的所有答案。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：intervals = [[1,4],[2,4],[3,6],[4,4]], queries = [2,3,4,5]
+输出：[3,3,1,4]
+解释：查询处理如下：
+- Query = 2 ：区间 [2,4] 是包含 2 的最小区间，答案为 4 - 2 + 1 = 3 。
+- Query = 3 ：区间 [2,4] 是包含 3 的最小区间，答案为 4 - 2 + 1 = 3 。
+- Query = 4 ：区间 [4,4] 是包含 4 的最小区间，答案为 4 - 4 + 1 = 1 。
+- Query = 5 ：区间 [3,6] 是包含 5 的最小区间，答案为 6 - 3 + 1 = 4 。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-interval-to-include-each-query/description/">力扣（LeetCode）1851.包含每个查询的最小区间</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>排序<ul>
+<li>由于查询的是最短的区间长度，所以与查询的顺序无关，将查询数组按照从小到大排序，待查询的区间按照左边界排序，初始化查询结果集为全-1</li>
+</ul>
+</li>
+<li>离线查询 + 优先队列<ul>
+<li>遍历查询数组的元素进行查询，每次查询处理如下：<ul>
+<li>从前往后遍历排序后的查询区间，判断查询区间的左端点值，如果小于等于当前查询值则加入优先队列，同时以该区间的长度和右边界作为值对入队</li>
+<li>依次判断队顶元素，此时队顶的元素是满足左边界包含查询值的最小区间长度，判断该元素右边界是否小于查询值，若小于则表示查询值不在该区间里， 将队顶出队，循环直到有包含查询值的元素出现</li>
+<li>若上一步处理后队列不为空，则此时队顶元素的区间长度就是当前查询值的最小区间长度，将其填入对应的查询结果位置即可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最后返回查询结果集</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(n * log(n) + m * log(m))<ul>
+<li>n为查询区间长度，m为查询数组长度，二者都进行了排序，队列调整的时间复杂度log(n)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(m + n )<ul>
+<li>n和m分别是查询区间和数组的长度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// 排序 + 离线查询 + 优先队列
+class Solution:
+    def minInterval(self, intervals: List[List[int]], queries: List[int]) -&gt; List[int]:
+        n, m = len(intervals), len(queries)
+        intervals.sort()
+        queries = sorted((x, i) for i, x in enumerate(queries))
+        res = [-1] * m
+        pq = []
+        i = 0
+        for x, j in queries:
+            while i &lt; n and intervals[i][0] &lt;= x:
+                left, right = intervals[i]
+                heappush(pq, (right - left + 1, right))           
+                i += 1
+            while pq and pq[0][1] &lt; x:
+                heappop(pq)         
+            if pq:
+                res[j] = pq[0][0]
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “If time travel is possible, where are the tourists from the future?”（如果时空穿梭是可能的，那从未来穿越回来的旅客在哪里呢？）<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-931-下降路径最小和" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/">931-下降路径最小和</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/" class="article-date">
+  <time datetime="2023-07-13T01:30:43.000Z" itemprop="datePublished">2023-07-13</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个 n x n 的 方形 整数数组 matrix ，请你找出并返回通过 matrix 的下降路径 的 最小和 。</p>
+<p>下降路径 可以从第一行中的任何元素开始，并从每一行中选择一个元素。在下一行选择的元素和当前行所选元素最多相隔一列（即位于正下方或者沿对角线向左或者向右的第一个元素）。<br>具体来说，位置 (row, col) 的下一个元素应当是 (row + 1, col - 1)、(row + 1, col) 或者 (row + 1, col + 1) 。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode.com/uploads/2021/11/03/failing1-grid.jpg" alt="方形数组示例"></p>
+<pre><code class="diff">输入：matrix = [[2,1,3],[6,5,4],[7,8,9]]
+输出：13
+解释：如图所示，为和最小的两条下降路径
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-falling-path-sum/description/">力扣（LeetCode）931.下降路径最小和</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>简单DP<ul>
+<li>dp[i][j]表示到达当前matrix[i][j]时的最小路径和状态，</li>
+<li>初始状态，dp[0] = matrix[0]</li>
+<li>状态转移方程：<ul>
+<li>dp[i][j] = min(dp[i][j], min(dp[i-1][j], dp[i - 1][j - 1], dp[i - 1][j + 1]) + matrix[i][j]))</li>
+<li>这里需要考虑关于j是否越界的问题，分情况讨论</li>
+</ul>
+</li>
+<li>最后返回结果dp[-1]里的最小值即为最小路径和</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>DP<ul>
+<li>O(n^2)</li>
+<li>遍历一遍矩阵</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>DP<ul>
+<li>O(n^2)</li>
+<li>动态规划数组空间大小 n X n</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP 
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -&gt; int:
+        n = len(matrix)
+        dp = [[inf] * n for _ in range(n)]
+        for i in range(n):
+            if i == 0 :
+                for k in range(n):
+                    dp[0][k] = matrix[0][k]
+            else:
+                for j in range(n):
+                    if 0 &lt; j &lt; n - 1:
+                        dp[i][j] = min(dp[i][j], min(dp[i - 1][j - 1], dp[i - 1][j], dp[i - 1][j + 1]) + matrix[i][j])
+                    elif j == 0:
+                        dp[i][j] = min(dp[i][j], min(dp[i - 1][j], dp[i - 1][j + 1]) + matrix[i][j])
+                    else:
+                        dp[i][j] = min(dp[i][j], min(dp[i - 1][j], dp[i - 1][j - 1]) + matrix[i][j])
+        return min(dp[n - 1])
+
+        # # # # # # # #
+        dp = [matrix[0]]
+        n = len(matrix[0])
+        for i in range(1, n):
+            cur = [0] * n
+            for j in range(n):
+                mn = dp[-1][j]
+                if j &gt; 0:
+                    mn = min(mn, dp[i - 1][j - 1])
+                if j &lt; n - 1:
+                    mn = min(mn, dp[i - 1][j + 1])
+                cur[j] = mn + matrix[i][j]
+            dp.append(cur)
+        return min(dp[-1])
+                      
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “Quiet people have the loudest minds.”（沉默的人拥有最掷地有声的头脑。）<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-2178-拆分成最多数目的正偶数之和" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/">2178-拆分成最多数目的正偶数之和</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/" class="article-date">
+  <time datetime="2023-07-06T02:37:19.000Z" itemprop="datePublished">2023-07-06</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个整数 finalSum 。请你将它拆分成若干个 互不相同 的正偶数之和，且拆分出来的正偶数数目 最多 。</p>
+<p>比方说，给你 finalSum = 12 ，那么这些拆分是 符合要求 的（互不相同的正偶数且和为 finalSum）：(2 + 10) ，(2 + 4 + 6) 和 (4 + 8) 。它们中，(2 + 4 + 6) 包含最多数目的整数。注意 finalSum 不能拆分成 (2 + 2 + 4 + 4) ，因为拆分出来的整数必须互不相同。<br>请你返回一个整数数组，表示将整数拆分成 最多 数目的正偶数数组。如果没有办法将 finalSum 进行拆分，请你返回一个 空 数组。你可以按 任意 顺序返回这些整数。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：finalSum = 12
+输出：[2,4,6]
+解释：以下是一些符合要求的拆分：(2 + 10)，(2 + 4 + 6) 和 (4 + 8) 。
+(2 + 4 + 6) 为最多数目的整数，数目为 3 ，所以我们返回 [2,4,6] 。
+[2,6,4] ，[6,2,4] 等等也都是可行的解。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-split-of-positive-even-integers/description/">力扣（LeetCode）2178.拆分成最多数目的正偶数之和</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>贪心<ul>
+<li> 问题求最多的不重复偶数和，则可以考虑贪心思想</li>
+<li> 首先从2开始添加，每次增加2直到当前偶数大于finalnum的剩余值，表示偶数长度达到最长了</li>
+<li> 然后需要考虑最后一次添加的偶数res[-1]，由于继续添加res[-1]+2会大于剩余finalnum,所以考虑直接将res[-1]修改为res[-1] + finalnum，即最后的符合条件偶数</li>
+<li> 最后直接返回数组即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li><p>时间复杂度</p>
+<ul>
+<li>O(√n)</li>
+<li>循环次数k,则2（k * (k + 1) / 2) = n,所以k为√n，时间复杂度为√n</li>
+</ul>
+</li>
+<li><p>空间复杂度</p>
+<ul>
+<li>O(1)</li>
+<li>输出数组不计入空间复杂度</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// 贪心 
+class Solution:
+    def maximumEvenSplit(self, finalSum: int) -&gt; List[int]:
+        res = []
+        if finalSum % 2 != 0:
+            return res
+        i = 2
+        while i &lt;= finalSum:
+            res.append(i)
+            finalSum -= i
+            i += 2
+        res[-1] += finalSum
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   Quiet people have the loudest minds.”(沉默的人拥有最掷地有声的头脑。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1186-删除一次得到子数组最大和" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1186-删除一次得到子数组最大和</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/" class="article-date">
+  <time datetime="2023-06-27T02:49:40.000Z" itemprop="datePublished">2023-06-27</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个整数数组，返回它的某个 非空 子数组（连续元素）在执行一次可选的删除操作后，所能得到的最大元素总和。换句话说，你可以从原数组中选出一个子数组，并可以决定要不要从中删除一个元素（只能删一次哦），（删除后）子数组中至少应当有一个元素，然后该子数组（剩下）的元素总和是所有子数组之中最大的。</p>
+<p>注意，删除一个元素后，子数组 不能为空。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：arr = [1,-2,0,3]
+输出：4
+解释：我们可以选出 [1, -2, 0, 3]，然后删掉 -2，这样得到 [1, 0, 3]，和最大。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray-sum-with-one-deletion">力扣（LeetCode）1186.删除一次得到子数组最大和</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>DP<ul>
+<li> 将问题拆分成多个子问题，即求解以 arr[i]结尾的最多删除一次的非空子数组的最大和。</li>
+<li> 状态：使用dp[i][k]表示以arr[i]为结尾的删除k次元素后的子数组最大值</li>
+<li>边界条件：<br>  dp[0][0] = arr[0]<br>  dp[0][1] = 0</li>
+<li>状态转移方程：<br>  dp[i][0] = max(dp[i - 1][0], 0) + arr[i]<br>  dp[i][1] = max(dp[i - 1][1] + arr[i], dp[i - 1][0])</li>
+<li> 由于dp[i]只与dp[i -1]有关，所以可以使用二个整数变量来转移</li>
+<li> 最后返回过程中一直记录的最大值即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li><p>时间复杂度</p>
+<ul>
+<li>DP<ul>
+<li>O(n)</li>
+<li>数组长度为n</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>空间复杂度</p>
+<ul>
+<li>DP<ul>
+<li>O(1)</li>
+<li>二个变量即可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP 
+class Solution:
+    def maximumSum(self, arr: List[int]) -&gt; int:
+        &quot;&quot;&quot;
+        dp[i][k]表示以arr[i]为结尾的删除k次元素后的子数组最大值
+        dp[0][0] = arr[0]
+        dp[0][1] = 0
+        dp[i][0] = max(dp[i - 1][0], 0) + arr[i]
+        dp[i][1] = max(dp[i - 1][1] + arr[i], dp[i - 1][0])
+        &quot;&quot;&quot;
+        n = len(arr)
+        dp0, dp1, res = arr[0], 0, arr[0]
+        for i in range(1, n):
+            dp1 = max(dp1 + arr[i], dp0)
+            dp0 = max(dp0, 0) + arr[i]
+            res = max(res, max(dp0, dp1))
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “The thing about smart people is that they seem like crazy people to dumb people.” (聪明人的特质就是，在笨蛋眼里他们看起来像疯子。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1262-可被三整除的最大和" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/19/1262-%E5%8F%AF%E8%A2%AB%E4%B8%89%E6%95%B4%E9%99%A4%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1262-可被三整除的最大和</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/06/19/1262-%E5%8F%AF%E8%A2%AB%E4%B8%89%E6%95%B4%E9%99%A4%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/" class="article-date">
+  <time datetime="2023-06-19T07:59:39.000Z" itemprop="datePublished">2023-06-19</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个整数数组 nums，请你找出并返回能被三整除的元素最大和。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：nums = [3,6,5,1,8]
+输出：18
+解释：选出数字 3, 6, 1 和 8，它们的和是 18（可被 3 整除的最大和）。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/greatest-sum-divisible-by-three/">力扣（LeetCode）1262.可被三整除的最大和</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>贪心<ul>
+<li>首先将数组按照对3取余的结果分为3组：[0, 1, 2]，然后0的这一组是保留的结果，剩余的从1和2二个组里进行选择。</li>
+<li>这里在选择二者的数量时由于（cnt1 + 2 * cnt2) mod 3 = (cnt1 - cnt2) mod 3的结果需要是0，那么cnt1 和 cnt2的数量范围为[len(mod1 / mod2) - 2, len(mod1 / mod2) - 1, len(mod1 / mod2)]</li>
+<li>然后就可以利用二重循环遍历这9中可能性，同时运用贪心的思想，将二个数组进行降序排序，每次优先选择前面的大数作为尝试结果，满足被3整除即可停止遍历</li>
+<li>最后直接返回记录的结果与[0]数组之和即可</li>
+</ul>
+</li>
+<li>DP<ul>
+<li>首先用f[i, j]表示前i个元素选取若干元素求和后对3取模的结果为j</li>
+<li>然后考虑对于当前nums[i]元素，如果选择添加进去，则由f[i - 1,（j - nums[i])mod 3]转移得到，不添加则由f[i - 1, j]转移而来</li>
+<li>边界条件f[0,0] = 0, f[0, 1] = -inf , f[0, 2] = -inf,并且每一个i都可以由f[i- 1]的其中一个状态转移过来，所以可以用二维数组，记录f[i - 1]和更新f[i]即可</li>
+<li>具体状态转移方程为：<ul>
+<li>f[i,j] = max(f[i - 1, j], f[i - 1, (j - nums[i])mod 3) + nums[i])</li>
+</ul>
+</li>
+<li>最后返回f[0]即为对3取模为0的最大求和值</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>贪心<ul>
+<li>O(nlog n)</li>
+<li>数组排序 + 9次遍历</li>
+</ul>
+</li>
+<li>DP<ul>
+<li>O(n)</li>
+<li>数组元素遍历一遍更新状态即可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>贪心<ul>
+<li>O(n)</li>
+<li>n个元素存储</li>
+</ul>
+</li>
+<li>DP<ul>
+<li>O(1)</li>
+<li>常数3的空间开销</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// 贪心 / DP
+class Solution:
+    def maxSumDivThree(self, nums: List[int]) -&gt; int:
+        # 贪心
+        res = sum([num for num in nums if num % 3 == 0])
+        mod1 = sorted([num for num in nums if num % 3 == 1], reverse = True)
+        mod2 = sorted([num for num in nums if num % 3 == 2], reverse = True)
+
+        ans = 0
+        b, c = len(mod1), len(mod2)
+        for cntb in [b - 2, b - 1, b]:
+            if cntb &gt;= 0:
+                for cntc in [c - 2, c - 1, c]:
+                    if cntc &gt;= 0 and (cntb - cntc) % 3 == 0:
+                        ans = max(ans, sum(mod1[:cntb]) +sum(mod2[:cntc]))
+        return ans + res
+
+        # DP
+        f = [0, -float(&quot;inf&quot;), -float(&quot;inf&quot;)]
+        for num in nums:
+            g = f[:]
+            for i in range(3):
+                g[(i + num % 3) % 3] = max(g[(i + num % 3) % 3], f[i] + num)
+            f = g
+        return f[0]
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “Einstein was wrong when he said, ‘God does not play dice’. Consideration of black holes suggests, not only that God does play dice, but that he sometimes confuses us by throwing them where they can’t be seen”<br>(爱因斯坦曾说 ‘上帝从不掷骰子’。恰恰相反，黑洞的研究表明上帝的确会掷骰子，偶尔还让骰子销声匿迹，令人徒唤奈何。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1130-叶值的最小代价生成树" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/">1130-叶值的最小代价生成树</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/05/31/1130-%E5%8F%B6%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BB%A3%E4%BB%B7%E7%94%9F%E6%88%90%E6%A0%91/" class="article-date">
+  <time datetime="2023-05-31T02:21:31.000Z" itemprop="datePublished">2023-05-31</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个正整数数组 arr，考虑所有满足以下条件的二叉树：</p>
+<p>每个节点都有 0 个或是 2 个子节点。<br>数组 arr 中的值与树的中序遍历中每个叶节点的值一一对应。<br>每个非叶节点的值等于其左子树和右子树中叶节点的最大值的乘积。<br>在所有这样的二叉树中，返回每个非叶节点的值的最小可能总和。这个和的值是一个 32 位整数。</p>
+<p>如果一个节点有 0 个子节点，那么该节点为叶节点。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode.com/uploads/2021/08/10/tree1.jpg" alt="二叉树示例"></p>
+<pre><code class="diff">输入：arr = [6,2,4]
+输出：32
+解释：有两种可能的树，第一种的非叶节点的总和为 36 ，第二种非叶节点的总和为 32 。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values">力扣（LeetCode）1130.叶值的最小代价生成树</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>DP<ul>
+<li>自上而下建树</li>
+<li>首先考虑问题是将arr数组转化为叶子节点中序遍历的所有二叉树，所以可以将数组先划分任意二个非空子数组，分别作为左子树和右子树，不断递归直到子数组大小为1即为叶子节点，对应一个合法二叉树</li>
+<li>然后考虑动态规划方程，使用dp[i][j](i &lt; j )记录区间[i, j]子数组对应的最少代价和，则状态转移方程为：<ul>
+<li>dp[i][j] = 0, i = j</li>
+<li>dp[i][j] = min(dp[i][k] + dp[k + 1][j] + mval[i][k] * mval[k + 1][j]), i &lt;= k &lt; j, mval代表区间内的最大值</li>
+</ul>
+</li>
+<li>最后返回结果dp[0][n - 1]即为最小代价和</li>
+</ul>
+</li>
+<li>单调栈<ul>
+<li>自上而下建树</li>
+<li>首先考虑每次取arr相邻的二个数字x和y分别作为左右叶子节点，然后合并取最大值作为新arr值，重复上述步骤直到只剩下一个数则建树完成。所求的是建树过程每一步合并的代价之和即x * y最小</li>
+<li>然后考虑合并，当我们访问到arr[i] = x时，如果arr[i - 1] &gt;= x and arr[i + 1] &gt;= x， 则x需要和min(arr[i-1], arr[i + 1])进行合并才能保证代价最小</li>
+<li>接着考虑使用单调栈stack进行存储数组遍历时的过程结果<ul>
+<li>如果栈非空并且栈顶元素y &lt;= x， 则将栈顶元素y出栈<ul>
+<li>如果栈为空或栈顶元素 &gt; x ，则将 x 与 y 合并代价最小，为 x * y</li>
+<li>否则合并 y 与栈顶元素，合并代价为 stack[-1] * y</li>
+<li>操作结束后将 x 入栈</li>
+</ul>
+</li>
+<li>最后得到一个严格递减的单调栈，如果长度 &gt; 2，则表示还有节点需要合并，此时只要按照顺序合并并计算合并代价即可</li>
+</ul>
+</li>
+<li>最后返回总的合并代价即为最小的合并代价值</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>DP<ul>
+<li>O(n^3)</li>
+<li>三重循环</li>
+</ul>
+</li>
+<li>单调栈<ul>
+<li>O(n)</li>
+<li>所有元素遍历一遍执行入栈 + 出栈的操作 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>DP<ul>
+<li>O(n^2)</li>
+<li>动态规划数组空间大小 n X n</li>
+</ul>
+</li>
+<li>单调栈<ul>
+<li>O(n)</li>
+<li>栈空间需要O(n)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DP / 单调栈
+class Solution:
+    def mctFromLeafValues(self, arr: List[int]) -&gt; int:
+        #  DP
+        n = len(arr)
+        dp = [[inf for _ in range(n)] for _ in range(n)]
+        mval = [[0 for _ in range(n)] for _ in range(n)]
+        for j in range(n):
+            mval[j][j] = arr[j]
+            dp[j][j] = 0
+            for i in range(j - 1, -1, -1):
+                mval[i][j] = max(arr[i], mval[i + 1][j])
+                for k in range(i, j):
+                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + mval[i][k] * mval[k + 1][j])
+        return dp[0][n - 1]
+
+
+        #  单调栈
+        res = 0
+        stack = []
+        for x in arr:
+            while stack and stack[-1] &lt;= x:
+                y = stack.pop()
+                if not stack or stack[-1] &gt; x:
+                    res += x * y
+                else:
+                    res += stack[-1] * y
+            stack.append(x)
+        while len(stack) &gt;= 2:
+            x = stack.pop()
+            res += stack[-1] * x
+        return res
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “It would not be much of a universe if it wasn’t home to the people you love.”(如果宇宙不是你所爱的人的家，那宇宙就没有什么意义了。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1110-删点成林" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/">1110-删点成林</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/05/30/1110-%E5%88%A0%E7%82%B9%E6%88%90%E6%9E%97/" class="article-date">
+  <time datetime="2023-05-30T06:32:25.000Z" itemprop="datePublished">2023-05-30</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给出二叉树的根节点 root，树上每个节点都有一个不同的值。</p>
+<p>如果节点值在 to_delete 中出现，我们就把该节点从树上删去，最后得到一个森林（一些不相交的树构成的集合）。</p>
+<p>返回森林中的每棵树。你可以按任意顺序组织答案。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/07/05/screen-shot-2019-07-01-at-53836-pm.png" alt="二叉树示例"></p>
+<pre><code class="diff">输入：root = [1,2,3,4,5,6,7], to_delete = [3,5]
+输出：[[1,2,null,4],[6],[7]]
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-nodes-and-return-forest">力扣（LeetCode）1110.删点成林</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>DFS<ul>
+<li>首先判断节点值是否在删除列表中，如果在则左右子树节点成为潜在根节点，不在则继续向下搜索</li>
+<li>然后对左右子树的潜在根节点进行判断，如果父节点被删除并且该节点值不在删除列表中，则将该节点变为头节点加入结果列表中</li>
+<li>最后返回结果列表即可，注意判断父与子节点值是否删除后的返回结果</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(n)</li>
+<li>最多访问n个节点</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(n)</li>
+<li>树共有n个节点</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// DFS
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -&gt; List[TreeNode]:
+        to_delete_set = set(to_delete)
+        roots = []
+        self.dfs(root, True, to_delete_set, roots)
+        return roots
+
+    def dfs(self, node: Optional[TreeNode], is_root: bool, to_delete_set: set[int], roots: List[TreeNode]) -&gt; Optional[TreeNode]:
+        if not node:
+            return None
+        delete = node.val in to_delete_set
+        node.left = self.dfs(node.left, delete, to_delete_set, roots)
+        node.right = self.dfs(node.right, delete, to_delete_set, roots)
+        if delete:
+            return None
+        else:
+            if is_root:
+                roots.append(node)
+            return node
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “I have noticed that even people who claim everything is predetermined and that we can do nothing to change it, look before they cross the road.”(我注意到，即使那些声称一切都已注定、人力无法改变天意的人在过马路的时候还是会左看右看。)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-1091-二进制矩阵中的最短路径" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">1091-二进制矩阵中的最短路径</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/05/26/1091-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" class="article-date">
+  <time datetime="2023-05-26T07:34:34.000Z" itemprop="datePublished">2023-05-26</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>给你一个 n x n 的二进制矩阵 grid 中，返回矩阵中最短 畅通路径 的长度。如果不存在这样的路径，返回 -1 。</p>
+<p>二进制矩阵中的 畅通路径 是一条从 左上角 单元格（即，(0, 0)）到 右下角 单元格（即，(n - 1, n - 1)）的路径，该路径同时满足下述要求：</p>
+<p>路径途经的所有单元格都的值都是 0 。<br>路径中所有相邻的单元格应当在 8 个方向之一 上连通（即，相邻两单元之间彼此不同且共享一条边或者一个角）。<br>畅通路径的长度 是该路径途经的单元格总数。</p>
+<p><strong>示例</strong><br><img src="https://assets.leetcode.com/uploads/2021/02/18/example1_1.png" alt="矩阵示例"></p>
+<pre><code class="diff">输入：grid = [[0,1],[1,0]]
+输出：2
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-path-in-binary-matrix">力扣（LeetCode）1091.二进制矩阵中的最短路径</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li>经典BFS<ul>
+<li>首先判断出发点是否为0，不是则不存在路径返回-1</li>
+<li>然后用队列进行BFS遍历所有节点，同时初始化一个二维数组dist记录各个节点的最短路径，初始化为无穷大，dist[0][0] = 1</li>
+<li>接着以队列是否为空为条件遍历节点，每次弹出一个节点，判断周围节点下标是否符合条件，以及节点值是否为0，并用当前节点值是否等于前一个节点 + 1 来确定是否被访问过</li>
+<li>遍历时当队列出栈的节点为右下角节点时，返回dist[n - 1][n - 1]即可，否则继续遍历并更新节点路径值，同时将下一个满足路径的节点入队列</li>
+<li>循环结束则返回 - 1</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>O(n ^ 2)</li>
+<li>最多将n X n大小的矩阵元素都访问一遍</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>O(n ^ 2)</li>
+<li>需要一个n X n的数组记录每个节点的最短路径值</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// BFS
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -&gt; int:
+        if grid[0][0] == 1:
+            return -1
+        n = len(grid)
+        dist = [[inf] * n for _ in range(n)]
+        dist[0][0] = 1
+        queue = deque([(0, 0)])
+        while queue:
+            x, y = queue.popleft()
+            if x == y == n - 1:
+                return dist[x][y]
+            for i in range(-1, 2):
+                for j in range(-1, 2):
+                    if x + i &lt; 0 or x + i &gt;= n or y + j &lt; 0 or y + j &gt;= n:
+                        continue
+                    if grid[x + i][y + j] == 1 or dist[x + i][y + j] &lt;= dist[x][y] + 1:
+                        continue
+                    dist[x + i][y + j] =  dist[x][y] + 1
+                    queue.append((x + i, y + j))
+        return -1
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   There are only two kinds of force: the sword and thought. From the long terms, the sword is always defeated by thinking men. (世上只有两种力量：利剑和思想。从长而论，利剑总是败在思想手下。)<br>        ——拿破仑（1769.8.15——1821.5.5）</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-Djangon-Vue-Admin开发" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/05/15/Djangon-Vue-Admin%E5%BC%80%E5%8F%91/">Djangon-Vue-Admin开发</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2023/05/15/Djangon-Vue-Admin%E5%BC%80%E5%8F%91/" class="article-date">
+  <time datetime="2023-05-15T09:52:16.000Z" itemprop="datePublished">2023-05-15</time>
+</a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>pip安装不上包，尝试换源以及添加–trusted<br><strong>示例</strong></p>
+<pre><code class="diff">输入：barcodes = [1,1,1,2,2,2]
+输出：[2,1,2,1,2,1]
+</code></pre>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+  </nav>
+
+
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/20221021-1.jpg" title="图片来自网络"></img>
+    <h3 class="avatar-name">
+      
+        Pluto
+      
+    </h3>
+    <p class="avatar-slogan">
+      Universe
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="tag">优先队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" rel="tag">最大堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" rel="tag">标记遍历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E7%BA%BF%E6%9F%A5%E8%AF%A2/" rel="tag">离线查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" rel="tag">简单模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag">随机化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BE%99%E6%97%8F/" rel="tag">龙族</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/DFS/" style="font-size: 13.33px;">DFS</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" style="font-size: 10px;">优先队列</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 10px;">单调栈</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 10px;">双指针</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E5%A0%86/" style="font-size: 10px;">最大堆</a> <a href="/tags/%E6%A0%87%E8%AE%B0%E9%81%8D%E5%8E%86/" style="font-size: 10px;">标记遍历</a> <a href="/tags/%E7%A6%BB%E7%BA%BF%E6%9F%A5%E8%AF%A2/" style="font-size: 10px;">离线查询</a> <a href="/tags/%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">简单模拟</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 13.33px;">贪心</a> <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" style="font-size: 10px;">随机化</a> <a href="/tags/%E9%BE%99%E6%97%8F/" style="font-size: 10px;">龙族</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/29/823-%E5%B8%A6%E5%9B%A0%E5%AD%90%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/">823-带因子的二叉树</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/18/1851-%E5%8C%85%E5%90%AB%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%BA%E9%97%B4/">1851-包含每个查询的最小区间</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/13/931-%E4%B8%8B%E9%99%8D%E8%B7%AF%E5%BE%84%E6%9C%80%E5%B0%8F%E5%92%8C/">931-下降路径最小和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/06/2178-%E6%8B%86%E5%88%86%E6%88%90%E6%9C%80%E5%A4%9A%E6%95%B0%E7%9B%AE%E7%9A%84%E6%AD%A3%E5%81%B6%E6%95%B0%E4%B9%8B%E5%92%8C/">2178-拆分成最多数目的正偶数之和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/27/1186-%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1%E5%BE%97%E5%88%B0%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/">1186-删除一次得到子数组最大和</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://yiluyanxia.github.io/" title target='_blank'
+        >一路眼瞎</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2023 Pluto &nbsp;&nbsp;
+    驱动于 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a target="_blank" rel="noopener" href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/null" class="mobile-nav-link">标签</a>
+  
+    <a href="/" class="mobile-nav-link">关于</a>
+  
+    <a href="/" class="mobile-nav-link">友链</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>
