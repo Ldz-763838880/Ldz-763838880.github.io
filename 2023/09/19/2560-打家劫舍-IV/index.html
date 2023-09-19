@@ -5,22 +5,27 @@
   
 
   
-  <title>归档: 2022/10 | 研の随笔</title>
+  <title>2560-打家劫舍 IV | 研の随笔</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   <meta name="keywords" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女" />
   
-  <meta name="description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
-<meta property="og:type" content="website">
-<meta property="og:title" content="研の随笔">
-<meta property="og:url" content="http://example.com/archives/2022/10/index.html">
+  <meta name="description" content="1 题目描述沿街有一排连续的房屋。每间房屋内都藏有一定的现金。现在有一位小偷计划从这些房屋中窃取现金。 由于相邻的房屋装有相互连通的防盗系统，所以小偷 不会窃取相邻的房屋 。 小偷的 窃取能力 定义为他在窃取过程中能从单间房屋中窃取的 最大金额 。 给你一个整数数组 nums 表示每间房屋存放的现金金额。形式上，从左起第 i 间房屋中放有 nums[i] 美元。 另给你一个整数 k ，表示窃贼将会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2560-打家劫舍 IV">
+<meta property="og:url" content="http://example.com/2023/09/19/2560-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D-IV/index.html">
 <meta property="og:site_name" content="研の随笔">
-<meta property="og:description" content="我们每个人都是一个哀小孩，或许是不知梦的缘故，流离之人追逐幻影">
+<meta property="og:description" content="1 题目描述沿街有一排连续的房屋。每间房屋内都藏有一定的现金。现在有一位小偷计划从这些房屋中窃取现金。 由于相邻的房屋装有相互连通的防盗系统，所以小偷 不会窃取相邻的房屋 。 小偷的 窃取能力 定义为他在窃取过程中能从单间房屋中窃取的 最大金额 。 给你一个整数数组 nums 表示每间房屋存放的现金金额。形式上，从左起第 i 间房屋中放有 nums[i] 美元。 另给你一个整数 k ，表示窃贼将会">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-19T02:35:19.000Z">
+<meta property="article:modified_time" content="2023-09-19T02:58:59.419Z">
 <meta property="article:author" content="Pluto">
-<meta property="article:tag" content="龙族、路明非、楚子航、凯撒·加图索、陈墨瞳、上杉绘梨衣、源稚生、源稚女">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="DP">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="研の随笔" type="application/atom+xml">
@@ -72,45 +77,176 @@
   </div>
 </header>
       <div id="middlecontent" title class="global-width sidebar-right">
-        <section id="main">
+        <section id="main"><article id="post-2560-打家劫舍-IV" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="global-container archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/18/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      2560-打家劫舍 IV
     </h1>
   
-      
+
     </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2022/10/18/hello-world/" class="article-date">
-  <time datetime="2022-10-18T06:52:30.674Z" itemprop="datePublished">2022-10-18</time>
+  
+  <div class="article-meta">
+    <a href="/2023/09/19/2560-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D-IV/" class="article-date">
+  <time datetime="2023-09-19T02:35:19.000Z" itemprop="datePublished">2023-09-19</time>
 </a>
+    
+    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
+
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
       
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1 题目描述"></a>1 题目描述</h2><p>沿街有一排连续的房屋。每间房屋内都藏有一定的现金。现在有一位小偷计划从这些房屋中窃取现金。</p>
+<p>由于相邻的房屋装有相互连通的防盗系统，所以小偷 不会窃取相邻的房屋 。</p>
+<p>小偷的 窃取能力 定义为他在窃取过程中能从单间房屋中窃取的 最大金额 。</p>
+<p>给你一个整数数组 nums 表示每间房屋存放的现金金额。形式上，从左起第 i 间房屋中放有 nums[i] 美元。</p>
+<p>另给你一个整数 k ，表示窃贼将会窃取的 最少 房屋数。小偷总能窃取至少 k 间房屋。</p>
+<p>返回小偷的 最小 窃取能力。</p>
+<p><strong>示例</strong></p>
+<pre><code class="diff">输入：nums = [2,3,5,9], k = 2
+输出：5
+解释：
+小偷窃取至少 2 间房屋，共有 3 种方式：
+- 窃取下标 0 和 2 处的房屋，窃取能力为 max(nums[0], nums[2]) = 5 。
+- 窃取下标 0 和 3 处的房屋，窃取能力为 max(nums[0], nums[3]) = 9 。
+- 窃取下标 1 和 3 处的房屋，窃取能力为 max(nums[1], nums[3]) = 9 。
+因此，返回 min(5, 9, 9) = 5 。
+</code></pre>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>题目来源：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iv/description/?envType=daily-question&envId=2023-09-19">力扣（LeetCode）2560. 打家劫舍 IV</a><br><a id="jump_8"></a></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2 解题思路"></a>2 解题思路</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iv/solutions/2093952/er-fen-da-an-dp-by-endlesscheng-m558/?envType=daily-question&envId=2023-09-19">思路链接</a><a id="jump_8"></a></p>
+</li>
+<li><p>二分 + DP</p>
+<ul>
+<li>mx 表示最大窃取金额，定义 f[i]表示从 nums[0]到 nums[i]中偷金额不超过mx 的房屋，最多能偷多少间房屋</li>
+<li>使用二个遍历f0,f1表示当前i房间是否被偷，初始状态，f0, f1 = 0</li>
+<li>状态转移方程：<ul>
+<li>i房间不偷<ul>
+<li>f0 = f1</li>
+</ul>
+</li>
+<li>i房间偷<ul>
+<li>f1 = max（f1， f0 + 1)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最后二分查找[0, max(nums)]，mx为二分值，找到满足k的第一个mx,而且mx必定是在nums里面</li>
+</ul>
+</li>
+<li><p>二分 + 贪心</p>
+<ul>
+<li>mx 表示最大窃取金额，统计当前满足mx时偷取的最大房屋数量，可以证明遍历nums可以偷的就直接偷</li>
+<li>最后二分查找[0, max(nums)]，mx为二分值，找到满足k的第一个mx,而且mx必定是在nums里面</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-复杂度分析"><a href="#3-复杂度分析" class="headerlink" title="3 复杂度分析"></a>3 复杂度分析</h2><ul>
+<li>时间复杂度<ul>
+<li>二分 + DP/贪心<ul>
+<li>O(nlog(U))</li>
+<li>遍历一遍矩阵 + 二分查找</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空间复杂度<ul>
+<li>二分 + DP/贪心<ul>
+<li>O(1)</li>
+<li>常规变量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4 代码"></a>4 代码</h2><pre><code class="python">// 二分 + DP/贪心 
+class Solution:
+    def minCapability(self, nums: List[int], k: int) -&gt; int:
+        # 二分 + DP
+        def solve(mx: int) -&gt; int:
+            f0 = f1 = 0
+            for num in nums:
+                if num &gt; mx:
+                    f0 = f1
+                else:
+                    f0, f1 = f1, max(f1, f0 + 1)
+            return f1
+        return bisect_left(range(max(nums)), k, key = solve)
+
+        # 二分 + 贪心
+        def solve(mx: int) -&gt; int:
+            cnt = i = 0
+            while i &lt; len(nums):
+                if nums[i] &gt; mx:
+                    i += 1
+                else:
+                    cnt += 1
+                    i += 2
+            return cnt
+
+        return bisect_left(range(max(nums)), k, key = solve)
+                      
+</code></pre>
+<h3 id="每日一言"><a href="#每日一言" class="headerlink" title="每日一言"></a>每日一言</h3><blockquote>
+<p>   “Without imperfection, you or I would not exist.”(万物浑然天成，吾辈因何而生?)<br>        ——斯蒂芬·霍金（Stephen William Hawking,1942.1.8.—2018.3.14）</p>
+</blockquote>
+
       
     </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2023/08/29/823-%E5%B8%A6%E5%9B%A0%E5%AD%90%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">823-带因子的二叉树</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
 </article>
-  
-  
-    </div></section>
-  
-
-
 </section>
         <aside id="sidebar">
   
